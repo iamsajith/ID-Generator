@@ -27,8 +27,9 @@ const adminSchema = new schema({
 },{
  versionKey: false
 })
-const studentData = mongoose.model('students',studentSchema)
-const moderatorData = mongoose.model('moderators',moderatorSchema)
-const adminData = mongoose.model('admins',adminSchema)
+const studentData =new mongoose.model('student',studentSchema,'students')
+const moderatorData =new mongoose.model('moderators',moderatorSchema)
+const adminData =new mongoose.model('admins',adminSchema)
 
 module.exports = {studentData,moderatorData,adminData}
+// module.exports = adminData

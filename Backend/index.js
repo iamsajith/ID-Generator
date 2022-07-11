@@ -30,7 +30,7 @@ app.post("/student", (req, res) => {
     if (user !== null) {
       let payload = { subject: user.email + user.password };
       let token = jwt.sign(payload, "secretKey");
-      res.status(200).send({ token });
+      res.status(200).send({token: token, data:user._id });
     }
     else {
       res.status(401).send('Wrong Credentials')
