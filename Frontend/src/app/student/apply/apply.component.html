@@ -1,0 +1,56 @@
+<app-header></app-header>
+<div class="wrapper">
+ <div class="text-center mt-2 mb-3 name">Greeting</div>
+
+ <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Verify()">
+   <div class="form-field d-flex align-items-center">
+     <span>👤</span>
+     <input
+       type="text"
+       name="urname"
+       id="urName"
+       placeholder="Your Name"
+       [(ngModel)]="data.urname"
+       #urname="ngModel"
+       [class.is-invalid]="urname.invalid && urname.touched"
+       required
+     />
+     <small [class.d-none]="urname.valid" class="px-3 text-danger">χ</small>
+     <small [class.d-none]="urname.invalid" class="px-3 text-success">✓</small>
+   </div>
+   <div class="form-field d-flex align-items-center">
+     <span>👬</span>
+     <input
+       type="text"
+       name="frname"
+       id="frName"
+       placeholder="Friend's Name"
+       [(ngModel)]="data.frname"
+       #frname="ngModel"
+       [class.is-invalid]="frname.invalid && frname.touched"
+       required
+     />
+     <small [class.d-none]="frname.valid" class="px-3 text-danger">χ</small>
+     <small [class.d-none]="frname.invalid" class="px-3 text-success">✓</small>
+   </div>
+   <div class="form-field d-flex align-items-center">
+     <span>📧</span>
+     <input
+       type="email"
+       name="email"
+       id="userName"
+       placeholder="Friend's Email"
+       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+       [(ngModel)]="data.email"
+       #email="ngModel"
+       [class.is-invalid]="email.invalid && email.touched"
+       required
+     />
+     <small [class.d-none]="email.valid" class="px-3 text-danger">χ</small>
+     <small [class.d-none]="email.invalid" class="px-3 text-success">✓</small>
+   </div>
+   <button class="btn mt-3 mb-1" [disabled]="userlogin.form.invalid">
+     CREATE
+   </button>
+ </form>
+</div>

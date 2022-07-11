@@ -10,15 +10,15 @@ export class AuthService {
 
   studentcheck(data: any) {
     console.log(data)
-    return this.http.post('http://localhost:3000/student', data)
+    return this.http.post('http://localhost:8080/student', data)
   }
   moderatorcheck(data: any) {
     console.log(data)
-    return this.http.post('http://localhost:3000/moderator', data)
+    return this.http.post('http://localhost:8080/moderator', data)
   }
   admincheck(data: any) {
     console.log(data)
-    return this.http.post('http://localhost:3000/admin', data)
+    return this.http.post('http://localhost:8080/admin', data)
   }
 
 }
