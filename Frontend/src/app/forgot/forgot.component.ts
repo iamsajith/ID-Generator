@@ -25,9 +25,11 @@ export class ForgotComponent implements OnInit {
   Change() {
     if(this.data.role === "Student"){
       this.forgot.studentforgot(this.data).subscribe()
+      this._route.navigate(["/"])
     }
     else if(this.data.role === "Batch Manager"){
       this.forgot.moderatorforgot(this.data).subscribe()
+      this._route.navigate(["/"])
     }
     else if(this.data.role === "Admin"){
       this.forgot.adminforgot(this.data).subscribe(()=>{

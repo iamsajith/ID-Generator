@@ -49,12 +49,7 @@ export class LoginComponent implements OnInit {
       )
     }
     else {
-      this._auth.studentcheck(this.User).subscribe((data) => {
-        console.log(data)
-        this._router.navigate(['/'])
-
-      }
-      )
+        window.location.reload()
     }
 
   }
