@@ -1,56 +1,155 @@
 <app-header></app-header>
-<div class="wrapper">
- <div class="text-center mt-2 mb-3 name">Greeting</div>
+<div class="col w-75 wrapper">
+  <div class="text-center mt-2 mb-3 name">
+    REGISTRATION
+  </div>
+  <div class="container">
+    <form #userreg="ngForm" (ngSubmit)="Register()">
+      <div class="row d-flex justify-content-between">
+      <div class="col-sm mx-1">
+        <div class="form-field d-flex align-items-center">
+          <span>👤</span>
+          <input
+            type="text"
+            name="name"
+            id="Name"
+            placeholder="Name"
+            [(ngModel)]="data.name"
+            #name="ngModel"
+            [class.is-invalid]="name.invalid && name.touched"
+            required
+          />
+          <small [class.d-none]="name.valid" class="px-3 text-danger">χ</small>
+          <small [class.d-none]="name.invalid" class="px-3 text-success">✓</small>
+        </div>
+        <div class="form-field d-flex align-items-center">
+          <span>📧</span>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+            [(ngModel)]="data.email"
+            #email="ngModel"
+            [class.is-invalid]="email.invalid && email.touched"
+            required
+          />
+          <small [class.d-none]="email.valid" class="px-3 text-danger">χ</small>
+          <small [class.d-none]="email.invalid" class="px-3 text-success">✓</small>
+        </div>
+        <div class="form-field d-flex align-items-center">
+          <span>📧</span>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            minlength="13"
+            maxlength="13"
+            placeholder="Phone Number"
+            [(ngModel)]="data.phone"
+            #phone="ngModel"
+            [class.is-invalid]="phone.invalid && phone.touched"
+            required
+          />
+          <small [class.d-none]="phone.valid" class="px-3 text-danger">χ</small>
+          <small [class.d-none]="phone.invalid" class="px-3 text-success">✓</small>
+        </div>
+        <div class="form-field d-flex align-items-center">
+          <span>📧</span>
+          <input
+          class="form-control form-control-sm"
+            type="file"
+            name="file"
+            id="file"
+            accept="image/*"
+            placeholder="Photo"
+            [(ngModel)]="data.image"
+            #image="ngModel"
+            [class.is-invalid]="image.invalid && image.touched"
+            required
+          />
+          <small [class.d-none]="image.valid" class="px-3 text-danger">χ</small>
+          <small [class.d-none]="image.invalid" class="px-3 text-success">✓</small>
+        </div>
 
- <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Verify()">
-   <div class="form-field d-flex align-items-center">
-     <span>👤</span>
-     <input
-       type="text"
-       name="urname"
-       id="urName"
-       placeholder="Your Name"
-       [(ngModel)]="data.urname"
-       #urname="ngModel"
-       [class.is-invalid]="urname.invalid && urname.touched"
-       required
-     />
-     <small [class.d-none]="urname.valid" class="px-3 text-danger">χ</small>
-     <small [class.d-none]="urname.invalid" class="px-3 text-success">✓</small>
-   </div>
-   <div class="form-field d-flex align-items-center">
-     <span>👬</span>
-     <input
-       type="text"
-       name="frname"
-       id="frName"
-       placeholder="Friend's Name"
-       [(ngModel)]="data.frname"
-       #frname="ngModel"
-       [class.is-invalid]="frname.invalid && frname.touched"
-       required
-     />
-     <small [class.d-none]="frname.valid" class="px-3 text-danger">χ</small>
-     <small [class.d-none]="frname.invalid" class="px-3 text-success">✓</small>
-   </div>
-   <div class="form-field d-flex align-items-center">
-     <span>📧</span>
-     <input
-       type="email"
-       name="email"
-       id="userName"
-       placeholder="Friend's Email"
-       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-       [(ngModel)]="data.email"
-       #email="ngModel"
-       [class.is-invalid]="email.invalid && email.touched"
-       required
-     />
-     <small [class.d-none]="email.valid" class="px-3 text-danger">χ</small>
-     <small [class.d-none]="email.invalid" class="px-3 text-success">✓</small>
-   </div>
-   <button class="btn mt-3 mb-1" [disabled]="userlogin.form.invalid">
-     CREATE
-   </button>
- </form>
-</div>
+
+      </div>
+      <div class="col-sm mx-1">
+        <div class="form-field d-flex align-items-center">
+          <span>👤</span>
+          <label for="" [class.d-none]="course.valid">Course</label>
+          <select type="text"
+          name="course"
+          id="course"
+          
+          [(ngModel)]="data.course"
+          #course="ngModel"
+          [class.is-invalid]="course.invalid && course.touched"
+          required 
+          >
+        <option *ngFor="let course of courses" [value]="course" >{{course}}</option>
+        </select>
+            
+          <small [class.d-none]="course.valid" class="px-3 text-danger">χ</small>
+          <small [class.d-none]="course.invalid" class="px-3 text-success">✓</small>
+        </div>
+        <div class="form-field d-flex align-items-center">
+          <span>👤</span>
+          <label for="" [class.d-none]="batch.valid">Batch</label>
+          <select type="text"
+          name="batch"
+          id="batch"
+          [(ngModel)]="data.batch"
+          #batch="ngModel"
+          [class.is-invalid]="batch.invalid && batch.touched"
+          required 
+          >
+        <option *ngFor="let batch of batches" [value]="batch">{{batch}}</option>
+        </select>
+            
+          <small [class.d-none]="batch.valid" class="px-3 text-danger">χ</small>
+          <small [class.d-none]="batch.invalid" class="px-3 text-success">✓</small>
+        </div>
+        <div class="form-field d-flex align-items-center">
+          <span>👤</span>
+          <input type="text"
+          name="sdate"
+          id="sdate"
+          placeholder="Start Date"
+          onfocus="(this.type='date')"
+          [(ngModel)]="data.startDate"
+          #sdate="ngModel"
+          [class.is-invalid]="sdate.invalid && sdate.touched"
+          required 
+          >
+            
+          <small [class.d-none]="sdate.valid" class="px-3 text-danger">χ</small>
+          <small [class.d-none]="sdate.invalid" class="px-3 text-success">✓</small>
+        </div>
+        <div class="form-field d-flex align-items-center">
+          <span>👤</span>
+          <input type="text"
+          name="edate"
+          id="edate"
+          placeholder="End Date"
+          onfocus="(this.type='date')"
+          [(ngModel)]="data.endDate"
+          #edate="ngModel"
+          [class.is-invalid]="edate.invalid && edate.touched"
+          required 
+          >
+            
+          <small [class.d-none]="edate.valid" class="px-3 text-danger">χ</small>
+          <small [class.d-none]="edate.invalid" class="px-3 text-success">✓</small>
+        </div>
+
+      </div>
+      </div>
+      
+    <!-- </div> -->
+    <button class="btn mt-3 mb-1" [disabled]="userreg.form.invalid">
+      LOGIN
+    </button>
+    </form>
+  </div>

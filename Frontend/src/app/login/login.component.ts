@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     else if (x === "mod") {
       this._auth.moderatorcheck(this.User).subscribe((data) => {
         const info = JSON.parse(JSON.stringify(data))
+        console.log(info)
         this._router.navigate(['/moderator/',info.data])
 
       }

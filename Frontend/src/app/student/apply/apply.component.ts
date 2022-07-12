@@ -6,17 +6,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./apply.component.css']
 })
 export class ApplyComponent implements OnInit {
-  data = {
-    email:"",
-    frname:"",
-    urname:""
+ courses = ["FSD","Data Science", "AI & ML","Software Testing"]
+ batches = ["KKEM-FEB-2022","ABCD-B1-MAR-2022","ABCD-B2-MAR-2022","KKEM-MAY-2022"]
 
+  data:any = {
+    name:"",
+    email:"",
+    phone:"+91",
+    image:"",
+    course:"",
+    batch:"",
+    startDate:"",
+    endDate:"",
   }
+ 
 
   constructor() { }
 
   ngOnInit(): void {
   }
-  Verify(){}
+  Register(){}
+  
+  
 
 }

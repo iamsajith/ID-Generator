@@ -9,16 +9,25 @@ export class AuthService {
   constructor(public http: HttpClient) { }
 
   studentcheck(data: any) {
-    console.log(data)
     return this.http.post('http://localhost:8080/student', data)
   }
   moderatorcheck(data: any) {
-    console.log(data)
     return this.http.post('http://localhost:8080/moderator', data)
   }
   admincheck(data: any) {
-    console.log(data)
     return this.http.post('http://localhost:8080/admin', data)
+  }
+
+  studentforgot(data:any){
+    return this.http.post('http://localhost:8080/student/newpassword',data)
+  }
+
+  moderatorforgot(data:any){
+    return this.http.post('http://localhost:8080/moderator/newpassword',data)
+  }
+
+  adminforgot(data:any){
+    return this.http.post('http://localhost:8080/admin/newpassword',data)
   }
 
 }
