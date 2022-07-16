@@ -13,6 +13,7 @@ import { HeaderComponent } from './student/header/header.component';
 import { ApplyComponent } from './student/apply/apply.component';
 import { StudentComponent } from './student/student/student.component';
 import { ForgotComponent } from './forgot/forgot.component';
+import { StatusComponent } from './student/status/status.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ForgotComponent } from './forgot/forgot.component';
     HeaderComponent,
     ApplyComponent,
     StudentComponent,
-    ForgotComponent
+    ForgotComponent,
+    StatusComponent
   ],
   imports: [
     BrowserModule,
