@@ -5,6 +5,7 @@ const dotenv = require("dotenv").config()
 const path = require('path');
 const {studentData,moderatorData,adminData} = require("./datamodel")
 const jwt = require("jsonwebtoken")
+const nodemailer = require("nodemailer")
 
 
 
@@ -124,12 +125,72 @@ app.post("/admin/newpassword",(req,res)=>{
   adminnew = (Math.random().toString(36).substring(2, 5)+"adm"+Math.random().toString(36).substring(2, 6))
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
-
-  adminData.findOneAndUpdate({email:req.body.email},{$set:{password:adminnew}}).then((data)=>{
+  data = req.body.email
+  adminData.findOneAndUpdate({email:data},{$set:{password:adminnew}}).then((data)=>{
     console.log("Success")
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      providerauth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD
+      }
+  });
+  
+  var mailOptions = {
+      from: process.env.EMAIL,
+      to: data,
+      subject: 'New Password',
+      text: `Your password is updated, New Password is ${adminnew}`
+  
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+      if(error){
+          console.log(error);
+      } else {
+          console.log('email send:'+info.response);
+      }
+  });
+
     res.send()
   })
 
+})
+
+app.post('/email/',(req,res)=>{
+  console.log(req.body.email)
+  var data = {
+    Name:req.body.urname,
+    fName:req.body.frname,
+    email:req.body.email,
+    id:req.body._id
+}
+console.log(data.email)
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL,
+        password: process.env.PASSWORD
+    }
+});
+
+var mailOptions = {
+    from: 'diwaliwishestoyou@gmail.com',
+    to: data.email,
+    subject: 'Happy Onam',
+    text: 'Hi '+data.fName+' your friend '+ data.Name +' send you onam wishes, check it   👉🏻👉🏻  ' + 'https://onamgreetings.herokuapp.com/wish/' +data.id+''
+
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        console.log(error);
+    } else {
+        console.log('email send:'+info.response);
+    }
+});
+  res.send()
 })
 
 

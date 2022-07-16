@@ -30,4 +30,8 @@ export class AuthService {
     return this.http.post('http://localhost:8080/admin/newpassword',data)
   }
 
+  isLoggedIn(){
+return !!localStorage.getItem("token")
+  }
+
 }

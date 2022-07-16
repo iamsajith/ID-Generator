@@ -32,4 +32,3 @@ const moderatorData =new mongoose.model('moderators',moderatorSchema)
 const adminData =new mongoose.model('admins',adminSchema)
 
 module.exports = {studentData,moderatorData,adminData}
-// module.exports = adminData
