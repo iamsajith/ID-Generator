@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./apply.component.css']
 })
 export class ApplyComponent implements OnInit {
+  
  courses = ["FSD","Data Science", "AI & ML","Software Testing"]
  batches = ["KKEM-FEB-2022","ABCD-B1-MAR-2022","ABCD-B2-MAR-2022","KKEM-MAY-2022"]
+ ngSelect = this.courses[0]
 
   data:any = {
     name:"",

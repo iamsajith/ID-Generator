@@ -19,14 +19,27 @@ export class AuthService {
   }
 
   studentforgot(data:any){
-    return this.http.post('http://localhost:8080/student/newpassword',data)
+    return this.http.post('http://localhost:8080/student/pin',data)
   }
 
   moderatorforgot(data:any){
-    return this.http.post('http://localhost:8080/moderator/newpassword',data)
+    return this.http.post('http://localhost:8080/moderator/pin',data)
   }
 
   adminforgot(data:any){
+    return this.http.post('http://localhost:8080/admin/pin',data)
+  }
+
+  studentnewpassword(data:any){
+    console.log(data)
+    return this.http.post('http://localhost:8080/student/newpassword',data)
+  }
+
+  moderatornewpassword(data:any){
+    return this.http.post('http://localhost:8080/moderator/newpassword',data)
+  }
+
+  adminnewpassword(data:any){
     return this.http.post('http://localhost:8080/admin/newpassword',data)
   }
 

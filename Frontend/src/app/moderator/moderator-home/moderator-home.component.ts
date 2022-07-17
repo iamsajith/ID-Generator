@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./moderator-home.component.css']
 })
 export class ModeratorHomeComponent implements OnInit {
+  
+
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  
 }

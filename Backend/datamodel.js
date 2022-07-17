@@ -10,6 +10,8 @@ const schema = mongoose.Schema
 const studentSchema = new schema({
  email : String,
  password : String,
+ pin:Number,
+
 },{
  versionKey: false
 })
@@ -17,6 +19,7 @@ const studentSchema = new schema({
 const moderatorSchema = new schema({
  email : String,
  password : String,
+ pin:Number,
 },{
  versionKey: false
 })
@@ -24,6 +27,7 @@ const moderatorSchema = new schema({
 const adminSchema = new schema({
  email : String,
  password : String,
+ pin:Number,
 },{
  versionKey: false
 })

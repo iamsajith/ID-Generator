@@ -24,7 +24,7 @@
     <small [class.d-none]="role.valid" class="px-3 text-danger">χ</small>
     <small [class.d-none]="role.invalid" class="px-3 text-success">✓</small>
   </div>
-   <div class="form-field d-flex align-items-center">
+   <div class="form-field d-flex align-items-center" [class.d-none]="role.invalid" >
      <span>📧</span>
      <input
        type="email"
@@ -40,7 +40,24 @@
      <small [class.d-none]="email.valid" class="px-3 text-danger">χ</small>
      <small [class.d-none]="email.invalid" class="px-3 text-success">✓</small>
    </div>
-   <button class="btn mt-3 mb-1" [disabled]="userlogin.form.invalid">
+   <div class="form-field d-flex align-items-center"[class.d-none]="email.invalid">
+    <span>🔑</span>
+    <input
+      type="number"
+      name="pin"
+      id="pin"
+      placeholder="PIN"
+      [(ngModel)]="data.pin"
+      #pin="ngModel"
+      pattern="[1-9]\d{3}"
+      [class.is-invalid]="pin.invalid && pin.touched"
+      required
+    />
+    <button type="button" class="pin" (click)="getpin()">Send PIN</button>
+    <small [class.d-none]="pin.valid" class="px-3 text-danger">χ</small>
+    <small [class.d-none]="pin.invalid" class="px-3 text-success">✓</small>
+  </div>
+   <button type="submit" class="btn mt-3 mb-1" [disabled]="userlogin.form.invalid">
      SEND NEW PASSWORD
    </button>
  </form>

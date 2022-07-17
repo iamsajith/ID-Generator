@@ -89,17 +89,17 @@
         <div class="col-sm mx-1">
           <div class="form-field d-flex align-items-center">
             <span>👤</span>
-            <label for="" [class.d-none]="course.valid">Course</label>
+            <!-- <label for="" [class.d-none]="course.valid">Course</label> -->
             <select
               type="text"
               name="course"
               id="course"
-              [(ngModel)]="data.course"
+              [(ngModel)]="ngSelect"
               #course="ngModel"
               [class.is-invalid]="course.invalid && course.touched"
               required
             >
-              <option *ngFor="let course of courses" [value]="course">
+              <option *ngFor="let course of courses" [selected]="course===ngSelect"[value]="course" >
                 {{ course }}
               </option>
             </select>

@@ -8,34 +8,55 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./forgot.component.css'],
 })
 export class ForgotComponent implements OnInit {
-  roles=["Student","Batch Manager","Admin"]
-  data={
-    email : '',
-    role:""
+  roles = ["Student", "Batch Manager", "Admin"]
+  data = {
+    email: '',
+    role: "",
+    pin: ""
   }
- 
+
 
   constructor(
     private _actiroute: ActivatedRoute,
     private forgot: AuthService,
-    private _route:Router
-  ) {}
+    private _route: Router
+  ) { }
 
-  ngOnInit(): void {}
-  Change() {
-    if(this.data.role === "Student"){
+  ngOnInit(): void { }
+  getpin() {
+    if (this.data.role === "Student") {
       this.forgot.studentforgot(this.data).subscribe()
-      this._route.navigate(["/"])
     }
-    else if(this.data.role === "Batch Manager"){
+    else if (this.data.role === "Batch Manager") {
       this.forgot.moderatorforgot(this.data).subscribe()
-      this._route.navigate(["/"])
     }
-    else if(this.data.role === "Admin"){
-      this.forgot.adminforgot(this.data).subscribe(()=>{
-        this._route.navigate(["/"])
+    else if (this.data.role === "Admin") {
+      this.forgot.adminforgot(this.data).subscribe(() => {
+
       })
 
     }
+  }
+
+  Change() {
+    if (this.data.role === "Student") {
+      this.forgot.studentnewpassword(this.data).subscribe(() => {
+        this._route.navigate(['/'])
+      })
+    }
+    else if (this.data.role === "Batch Manager") {
+      this.forgot.moderatornewpassword(this.data).subscribe(() => {
+        this._route.navigate(['/'])
+      })
+    }
+    else if (this.data.role === "Admin" ) {
+      this.forgot.adminnewpassword(this.data).subscribe(() => {
+        this._route.navigate(['/'])
+      })
+
+
+    }
+
+
   }
 }
