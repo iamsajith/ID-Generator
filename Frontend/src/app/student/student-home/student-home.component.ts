@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-student-home',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentHomeComponent implements OnInit {
 
-  constructor() { }
+  id = ""
+
+  constructor(private _actiroute: ActivatedRoute, private _route:Router, private _auth:AuthService) { }
 
   ngOnInit(): void {
+    this.id = this._actiroute.snapshot.params['id'];
+    console.log(this.id)
   }
 
 }
