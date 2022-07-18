@@ -8,17 +8,17 @@
  <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Change()">
   <div class="form-field d-flex align-items-center">
     <span>👤</span>
-    <label for="" [class.d-none]="role.valid">Role</label>
+    <!-- <label for="" [class.d-none]="role.valid">Role</label> -->
     <select type="text"
     name="role"
     id="role"
     
-    [(ngModel)]="data.role"
+    [(ngModel)]="ngSelect"
     #role="ngModel"
     [class.is-invalid]="role.invalid && role.touched"
     required 
     >
-  <option *ngFor="let role of roles" [value]="role" >{{role}}</option>
+  <option *ngFor="let role of roles" [selected]="role===ngSelect" [value]="role" >{{role}}</option>
   </select>
       
     <small [class.d-none]="role.valid" class="px-3 text-danger">χ</small>

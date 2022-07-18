@@ -1,1 +1,37 @@
-<div class="col w-75 wrapper"></div>
+<div class="wrapper">
+ <div class="container">
+  <div class="row card-header rounded d-flex justify-content-between align-items-center">
+   <div class="col-md status text-center">{{status[2]}}</div>
+   <div class="col btn rounded-circle" [hidden]="restricted == false" (click)="makepdf()"><i class="fa-solid fa-download"></i>
+   </div>
+  </div>
+  <div class="row d-flex justify-content-between align-items-center p-2" id="downloadfile">
+   <div class="col-sm mx-1 p-2">
+    <div class="id-card-tag"></div>
+    <div class="id-card-tag-strip"></div>
+    <div class="id-card-hook"></div>
+    <div class="id-card-holder">
+     <div class="id-card">
+      <div class="header">
+       <img src="assets/LOGO.png">
+      </div>
+      <div class="photo">
+       <img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAuXAAAAJDE2YjQzOGZkLTU5YzAtNGRkNC04NTUzLTM3Zjg0ZWVlMGQxZA.jpg">
+      </div>
+      <h2>Sajith Jayaram</h2>
+      <div class="qr-code">
+       <img src="https://www.shopify.com/growth-tools-assets/qr-code/shopify-faae7065b7b351d28495b345ed76096c03de28bac346deb1e85db632862fd0e4.png">
+      </div>
+      <h3>ictkerala.org</h3>
+      <hr>
+      <p>ICTAK - Supported by Govt. of India, partnered by Govt. of Kerala and the IT industry<p>
+      <p>GF-1 Thejaswini Building, Technopark</p>
+      <p>Ph:0471-2700811  | E-mail: info@ictkerala.org</p>
+   
+     </div>
+    </div>
+   </div>
+ </div>
+ </div>
+ </div>
+

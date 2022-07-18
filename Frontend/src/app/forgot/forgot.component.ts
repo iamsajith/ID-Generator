@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class ForgotComponent implements OnInit {
   roles = ["Student", "Batch Manager", "Admin"]
+  ngSelect = this.roles[0]
   data = {
     email: '',
     role: "",
