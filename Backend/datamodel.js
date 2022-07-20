@@ -17,7 +17,6 @@ const studentSchema = new schema({
  course:String,
  batch: String,
  image: String,
- qrcode:String,
  startDate: String,
  endDate: String
 

@@ -7,7 +7,6 @@ const { studentData, moderatorData, adminData } = require("./datamodel")
 const jwt = require("jsonwebtoken")
 const nodemailer = require("nodemailer")
 const { google } = require("googleapis")
-const QRCode = require('qrcode');
 const { datacatalog } = require("googleapis/build/src/apis/datacatalog");
 
 
@@ -15,13 +14,6 @@ const { datacatalog } = require("googleapis/build/src/apis/datacatalog");
 const app = new express();
 app.use(cors());
 app.use(express.json({ urlencoded: true }));
-
-
-// Require the package
-
-
-// QR Code
-
 
 
 
@@ -282,18 +274,9 @@ app.put("/admin/newpassword", (req, res) => {
 })
 
 app.post('/student/register', (req, res) => {
-  const generateQR =text => {
-    try {
-      console.log( QRCode.toDataURL(text))
-    } catch (err) {
-      console.error(err)
-    }
-  }
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
-  register = req.body
-  let text = `Name : ${register.name} | Phone : ${register.phone} | Email : ${register.email} | Course : ${register.course} | Batch : ${register.batch} | Validity : ${register.startDate} - ${register.endDate}`
-  qr = generateQR(text)
+ 
 
   studentData.findOneAndUpdate({ email: register.email }, {
     $set: {
@@ -302,12 +285,11 @@ app.post('/student/register', (req, res) => {
       course:register.course,
       batch: register.batch,
       image: register.image,
-      qrcode: qr,
       startDate: register.startDate,
       endDate: register.endDate
     }
   }).then((data) => {
-    res.send(data)
+    res.send()
 
   })
 
@@ -316,10 +298,10 @@ app.post('/student/register', (req, res) => {
 app.get("/idcard/:id",(req,res)=>{
 
 
-  studentData.findOne({_id:req.params.id},{email:0,password:0,pin:0,_id:0,image:0}).then((register)=>{
+  studentData.findOne({_id:req.params.id},{password:0,pin:0,_id:0,image:0}).then((data)=>{
    
 
-res.send(register)
+res.send(data)
   })
 
 
