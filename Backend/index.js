@@ -277,6 +277,7 @@ app.post('/student/register', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
  
+  register = req.body
 
   studentData.findOneAndUpdate({ email: register.email }, {
     $set: {
