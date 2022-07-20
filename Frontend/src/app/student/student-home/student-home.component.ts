@@ -15,7 +15,7 @@ export class StudentHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this._actiroute.snapshot.params['id'];
-    console.log(this.id)
+    localStorage.setItem("id",this.id)
   }
 
 }

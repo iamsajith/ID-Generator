@@ -23,6 +23,7 @@ export class AuthService {
   }
 
   moderatorforgot(data:any){
+    console.log(data)
     return this.http.post('http://localhost:8080/moderator/pin',data)
   }
 

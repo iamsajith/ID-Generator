@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { StudentService } from 'src/app/student.service';
 
 @Component({
   selector: 'app-status',
@@ -8,19 +9,26 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./status.component.css']
 })
 export class StatusComponent implements OnInit {
-  restricted = true
-  status= ["Submitted","Under Review","Available"]
+  newdata:any
+  myAngularxQrCode: string = ""
+  restricted = false
+  text:string = ""
+  status= ["Pending","Approved","Rejected"]
 
  @ViewChild('downloadfile',{static:false}) downloadfile!:ElementRef
 
-  constructor() { }
+  constructor(private _student:StudentService) {
+    this.myAngularxQrCode = 'Your QR code data string';
+   }
+
+  
   
   makepdf(){
     let DATA: any = document.getElementById('downloadfile');
     html2canvas(DATA).then((canvas) => {
-      let fileWidth = 200;
+      let fileWidth = 100;
       let fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const FILEURI = canvas.toDataURL('image/png');
+      const FILEURI = canvas.toDataURL('image/svg');
       let PDF = new jsPDF('p', 'mm', 'a4');
       let position = 0;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
@@ -31,6 +39,15 @@ export class StatusComponent implements OnInit {
 
 
   ngOnInit(): void {
+  const id = localStorage.getItem("id") 
+  this._student.getID(id).subscribe((data)=>{
+    console.log(data)
+    this.newdata = JSON.parse(JSON.stringify(data))
+    this.text = `Phone : ${this.newdata.phone} | Email : ${this.newdata.email} | Batch : ${this.newdata.batch} | Issue Date : ${this.newdata.startDate}`
+
+
+  })
+
 
   }
 

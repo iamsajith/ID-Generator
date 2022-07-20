@@ -11,11 +11,14 @@ export class HeaderComponent implements OnInit {
   constructor(private _router:Router) { }
 
   ngOnInit(): void {
+
+
   }
   apply(){
     this._router.navigate([`/${localStorage.getItem("url")}/apply`])
   }
   status(){
+
     this._router.navigate([`/${localStorage.getItem("url")}/status`])
   }
   signOut(){
