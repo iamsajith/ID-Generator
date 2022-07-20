@@ -15,6 +15,11 @@ import { ApplyComponent } from './student/apply/apply.component';
 import { StudentComponent } from './student/student/student.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { StatusComponent } from './student/status/status.component';
+import { HeaderModComponent } from './moderator/header-mod/header-mod.component';
+import { HeaderHistoryComponent } from './moderator/header-history/header-history.component';
+import { HeaderApplicationsComponent } from './moderator/header-applications/header-applications.component';
+import { ApplicationsComponent } from './moderator/applications/applications.component';
+import { HistoryComponent } from './moderator/history/history.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,12 @@ import { StatusComponent } from './student/status/status.component';
     ApplyComponent,
     StudentComponent,
     ForgotComponent,
-    StatusComponent
+    StatusComponent,
+    HeaderModComponent,
+    HeaderHistoryComponent,
+    HeaderApplicationsComponent,
+    ApplicationsComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
