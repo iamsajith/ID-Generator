@@ -1,3 +1,8 @@
+<div data-aos="fade-left"
+     data-aos-anchor="#example-anchor"
+     data-aos-offset="500"
+     data-aos-duration="500">
+
 <div class="col w-75 wrapper">
   <div class="text-center mt-2 mb-3 name">REGISTRATION</div>
   <div class="container">
@@ -5,7 +10,7 @@
       <div class="row d-flex justify-content-between">
         <div class="col-sm mx-1">
           <div class="form-field d-flex align-items-center">
-            <span>👤</span>
+            <i class="fa-solid fa-user"></i>
             <input
               type="text"
               name="name"
@@ -24,7 +29,7 @@
             >
           </div>
           <div class="form-field d-flex align-items-center">
-            <span>📧</span>
+            <i class="fa-solid fa-envelope"></i>
             <input
               type="email"
               name="email"
@@ -44,13 +49,13 @@
             >
           </div>
           <div class="form-field d-flex align-items-center">
-            <span>📧</span>
+            <i class="fa-solid fa-phone"></i>
             <input
               type="text"
               name="phone"
               id="phone"
-              minlength="13"
-              maxlength="13"
+              minlength="10"
+              maxlength="10"
               placeholder="Phone Number"
               [(ngModel)]="data.phone"
               #phone="ngModel"
@@ -65,7 +70,7 @@
             >
           </div>
           <div class="form-field d-flex align-items-center">
-            <span>📧</span>
+            <i class="fa-solid fa-image"></i>
             <input
               class="form-control form-control-sm"
               type="file"
@@ -88,7 +93,7 @@
         </div>
         <div class="col-sm mx-1">
           <div class="form-field d-flex align-items-center">
-            <span>👤</span>
+            <i class="fa-solid fa-book"></i>
             <label for="" [class.d-none]="course.valid">Course</label>
             <select
               type="text"
@@ -99,7 +104,7 @@
               [class.is-invalid]="course.invalid && course.touched"
               required
             >
-              <option *ngFor="let course of courses" [value]="course">
+              <option *ngFor="let course of courses" [value]="course" >
                 {{ course }}
               </option>
             </select>
@@ -112,7 +117,7 @@
             >
           </div>
           <div class="form-field d-flex align-items-center">
-            <span>👤</span>
+            <i class="fa-solid fa-user-graduate"></i>
             <label for="" [class.d-none]="batch.valid">Batch</label>
             <select
               type="text"
@@ -136,7 +141,7 @@
             >
           </div>
           <div class="form-field d-flex align-items-center">
-            <span>👤</span>
+            <i class="fa-solid fa-calendar-days"></i>
             <input
               type="text"
               name="sdate"
@@ -157,7 +162,7 @@
             >
           </div>
           <div class="form-field d-flex align-items-center">
-            <span>👤</span>
+            <i class="fa-solid fa-calendar-days"></i>
             <input
               type="text"
               name="edate"
@@ -184,4 +189,5 @@
       </button>
     </form>
   </div>
+</div>
 </div>
