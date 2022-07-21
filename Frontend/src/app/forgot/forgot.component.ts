@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-forgot',
@@ -23,7 +24,9 @@ export class ForgotComponent implements OnInit {
     private _route: Router
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    AOS.init();
+   }
   getpin() {
     if (this.data.role === "Student") {
       this.forgot.studentforgot(this.data).subscribe()
@@ -61,3 +64,4 @@ export class ForgotComponent implements OnInit {
 
   }
 }
+
