@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistrationModel } from 'src/app/Model/student.model';
 import { StudentService } from 'src/app/student.service';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-apply',
@@ -18,6 +19,7 @@ export class ApplyComponent implements OnInit {
   constructor(private _student: StudentService) { }
 
   ngOnInit(): void {
+    AOS.init();
   }
   Register() {
     this._student.studentRegister(this.data).subscribe((data) => {
