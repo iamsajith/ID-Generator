@@ -1,7 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-const dotenv = require("dotenv").config()
+const dotenv = require("dotenv").config({path: "./vars/.env"})
 const path = require('path');
 const { studentData, moderatorData, adminData } = require("./datamodel")
 const jwt = require("jsonwebtoken")
@@ -276,7 +276,8 @@ app.put("/admin/newpassword", (req, res) => {
 app.post('/student/register', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
- 
+   
+
   register = req.body
 
   studentData.findOneAndUpdate({ email: register.email }, {
