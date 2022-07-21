@@ -1,3 +1,4 @@
+<div data-aos="zoom-out-up">
 <div class="wrapper">
  <div class="text-center mt-2 mb-3 name">ID GENERATOR</div>
 
@@ -7,7 +8,7 @@
 
  <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Change()">
   <div class="form-field d-flex align-items-center">
-    <span>👤</span>
+    <i class="fa-solid fa-user"></i>
     <label for="" [class.d-none]="role.valid">Role</label>
     <select type="text"
     name="role"
@@ -25,7 +26,7 @@
     <small [class.d-none]="role.invalid" class="px-3 text-success">✓</small>
   </div>
    <div class="form-field d-flex align-items-center" [class.d-none]="role.invalid" >
-     <span>📧</span>
+    <i class="fa-solid fa-envelope"></i>
      <input
        type="email"
        name="email"
@@ -41,7 +42,7 @@
      <small [class.d-none]="email.invalid" class="px-3 text-success">✓</small>
    </div>
    <div class="form-field d-flex align-items-center"[class.d-none]="email.invalid">
-    <span>🔑</span>
+    <i class="fa-solid fa-key"></i>
     <input
       type="number"
       name="pin"
@@ -62,4 +63,7 @@
    </button>
  </form>
 </div>
+</div>
+
+
 
