@@ -1,3 +1,4 @@
+<div data-aos="flip-up">
 <div class="wrapper">
  <div class="text-center mt-2 mb-3 name">ID GENERATOR</div>
 
@@ -8,7 +9,7 @@
 
  <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Verify()">
    <div class="form-field d-flex align-items-center">
-     <span>📧</span>
+    <i class="fa-solid fa-envelope"></i>
      <input
        type="email"
        name="email"
@@ -25,7 +26,7 @@
    </div>
 
    <div class="form-field d-flex align-items-center">
-     <span>🔒</span>
+    <i class="fa-solid fa-lock"></i>
      <input
        type="password"
        name="password"
@@ -49,4 +50,6 @@
    <a routerLink="/newpassword">Forgot password?</a>
  </div>
 </div>
+</div>
+
 
