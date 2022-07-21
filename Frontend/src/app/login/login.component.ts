@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import * as AOS from 'aos';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +15,12 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  constructor(private _auth: AuthService, private _router: Router) {}
+  constructor(private _auth: AuthService, private _router: Router, private toastr:ToastrService) {
+    
+  }
 
   ngOnInit(): void {
+    AOS.init();
     if (this._auth.isLoggedIn()) {
       this._router.navigate([localStorage.getItem("url")]);
     }
@@ -49,3 +54,4 @@ export class LoginComponent implements OnInit {
     }
   };
 }
+
