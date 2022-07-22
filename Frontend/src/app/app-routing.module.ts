@@ -15,7 +15,7 @@ import { StudentHomeComponent } from './student/student-home/student-home.compon
 import { StudentComponent } from './student/student/student.component';
 
 const routes: Routes = [{path:"",component:LoginComponent},{path:"newpassword",component:ForgotComponent},{path:"student/:id",canActivate:[AuthGuard], component:StudentComponent,children:[{path:"",component:StudentHomeComponent},{path:"apply",component:ApplyComponent},{path:"status",component:StatusComponent}]},{
-  path:"moderator/:id",component:ModeratorHomeComponent,children:[{path:"",component:ApplicationsComponent,children:[{path:"",component:HeaderApplicationsComponent}]},{path:"history",component:HistoryComponent,children:[{path:"",component:HeaderHistoryComponent}]}]
+  path:"moderator/:id",canActivate:[AuthGuard],component:ModeratorHomeComponent,children:[{path:"",component:ApplicationsComponent,children:[{path:"",component:HeaderApplicationsComponent}]},{path:"history",component:HistoryComponent,children:[{path:"",component:HeaderHistoryComponent}]}]
 },{path:"admin/:id",component:AdminHomeComponent}];
 
 @NgModule({

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import * as AOS from 'aos';
+
 @Component({
   selector: 'app-student-home',
   templateUrl: './student-home.component.html',

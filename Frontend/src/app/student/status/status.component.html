@@ -10,15 +10,15 @@
     <div class="id-card-holder" >
      <div class="id-card"  >
       <div class="header">
-       <img src="assets/LOGO.png">
+       <img loading="lazy" src="assets/LOGO.png">
       </div>
       <div class="photo">
-       <img src="assets/Sajeev J Photo.jpg">
+       <img loading="lazy" src="assets/Sajeev J Photo.jpg">
       </div>
       <h2>{{newdata.name}}</h2>
       <h3>{{newdata.course}}</h3>
       <div class="qr-code">
-        <qrcode [qrdata]="text" [width]="50" [errorCorrectionLevel]="'M'"></qrcode>
+        <qrcode loading="lazy" [qrdata]="text" [width]="50" [errorCorrectionLevel]="'M'"></qrcode>
       </div>
       <p  class="upto">Valid Upto : {{newdata.endDate}}</p>
       <hr>

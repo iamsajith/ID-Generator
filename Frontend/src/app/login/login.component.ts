@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import * as AOS from 'aos';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  constructor(private _auth: AuthService, private _router: Router, private toastr:ToastrService) {
+  constructor(private _auth: AuthService, private _router: Router) {
     
   }
 
@@ -54,4 +54,3 @@ export class LoginComponent implements OnInit {
     }
   };
 }
-
