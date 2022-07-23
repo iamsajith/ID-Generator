@@ -164,11 +164,17 @@ app.post("/student/pin", (req, res) => {
   const randomPin = Math.floor(1000 + Math.random() * 9000)
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
-  studentData.findOneAndUpdate({ email: req.body.email }, { $set: { pin: randomPin } }).then(() => {
+  studentData.findOneAndUpdate({ email: req.body.email }, { $set: { pin: randomPin } }).then((data) => {
+
+  if(data != null){
     const mail = req.body.email
     sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
       .catch((error) => { console.log(error) })
-    res.send()
+    res.status(200).send()
+  }
+  else{
+    res.status(404).send()
+  }
   })
 
 })
@@ -202,11 +208,18 @@ app.post("/moderator/pin", (req, res) => {
   const randomPin = Math.floor(1000 + Math.random() * 9000)
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
-  moderatorData.findOneAndUpdate({ email: req.body.email }, { $set: { pin: randomPin } }).then(() => {
+  moderatorData.findOneAndUpdate({ email: req.body.email }, { $set: { pin: randomPin } }).then((data) => {
+    if(data != null){
+    console.log(data)
     const mail = req.body.email
     sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
       .catch((error) => { console.log(error) })
-    res.send()
+    res.status(200).send()
+    }
+    else{
+      res.status(404).send()
+    }
+    
   })
 
 })
@@ -241,11 +254,16 @@ app.post("/admin/pin", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   adminData.findOneAndUpdate({ email: req.body.email }, { $set: { pin: randomPin } }).then((data) => {
+    if(data != null){
     console.log(data)
     const mail = req.body.email
     sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
       .catch((error) => { console.log(error) })
-    res.send()
+    res.status(200).send()
+    }
+    else{
+      res.status(404).send()
+    }
   })
 
 })
