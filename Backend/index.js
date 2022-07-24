@@ -104,7 +104,7 @@ app.post("/student", (req, res) => {
       res.status(200).send({ token: token, data: user._id });
     }
     else {
-      res.status(401).send('Wrong Credentials')
+      res.send(user)
     }
   });
 });
@@ -128,7 +128,7 @@ app.post("/moderator", (req, res) => {
       res.status(200).send({ token, data: user._id });
     }
     else {
-      res.status(401).send('Wrong Credentials')
+      res.send(user)
     }
   });
 });
@@ -152,7 +152,7 @@ app.post("/admin", (req, res) => {
       res.status(200).send({ token, data: user._id });
     }
     else {
-      res.status(401).send('Wrong Credentials')
+      res.send(user)
     }
   });
 });
@@ -170,10 +170,10 @@ app.post("/student/pin", (req, res) => {
     const mail = req.body.email
     sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
       .catch((error) => { console.log(error) })
-    res.status(200).send()
+    res.send(data)
   }
   else{
-    res.status(404).send()
+    res.send(data)
   }
   })
 
@@ -190,10 +190,10 @@ app.post("/student/newpassword", (req, res) => {
       const mail = req.body.email
       sendMail(step = 1, mail, studentnew).then((result) => console.log(result))
         .catch((error) => { console.log(error) })
-      res.send()
+      res.send(data)
     }
     else {
-      res.status(404).send("Data not found")
+      res.send(data)
     }
   })
 
@@ -214,10 +214,10 @@ app.post("/moderator/pin", (req, res) => {
     const mail = req.body.email
     sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
       .catch((error) => { console.log(error) })
-    res.status(200).send()
+    res.send(data)
     }
     else{
-      res.status(404).send()
+      res.send(data)
     }
     
   })
@@ -235,10 +235,10 @@ app.post("/moderator/newpassword", (req, res) => {
       const mail = req.body.email
       sendMail(step = 1, mail, moderatornew).then((result) => console.log(result))
         .catch((error) => { console.log(error) })
-      res.send()
+      res.send(data)
     }
     else {
-      res.status(404).send("Data not found")
+      res.send(data)
     }
   })
 
@@ -259,10 +259,10 @@ app.post("/admin/pin", (req, res) => {
     const mail = req.body.email
     sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
       .catch((error) => { console.log(error) })
-    res.status(200).send()
+    res.send(data)
     }
     else{
-      res.status(404).send()
+      res.send(data)
     }
   })
 
@@ -280,10 +280,10 @@ app.put("/admin/newpassword", (req, res) => {
       const mail = req.body.email
       sendMail(step = 1, mail, adminnew).then((result) => console.log(result))
         .catch((error) => { console.log(error) })
-      res.send()
+      res.send(data)
     }
     else {
-      res.status(404).send("Data not found")
+      res.send(data)
     }
   })
 
@@ -309,7 +309,7 @@ app.post('/student/register', (req, res) => {
       endDate: register.endDate
     }
   }).then((data) => {
-    res.send()
+    res.send(data)
 
   })
 
