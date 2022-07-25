@@ -328,6 +328,27 @@ res.send(data)
   
 })
 
+app.get("moderator/:id",(req,res)=>{
+  console.log(req.params.id)
+  moderatorData.find({_id:req.params.id}).then((err,data)=>{
+    if(err){
+      console.log(err)
+    }
+    else{
+    console.log(data)
+    }
+    res.send(data)
+})
+  
+})
+app.get("moderator/student/:data",(req,res)=>{
+  studentData.find({course:req.params.course,batch:req.params.batch}).then((data)=>{
+    console.log(data)
+    res.send(data)
+})
+  
+})
+
 
 
 const PORT = process.env.PORT || 5000

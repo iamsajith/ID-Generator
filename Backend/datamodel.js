@@ -5,7 +5,7 @@ mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true }).then((
 }).catch((err) => {
  console.log(err)
 })
-const schema = mongoose.Schema;
+const schema = mongoose.Schema
 
 const studentSchema = new schema({
  email: String,
@@ -18,7 +18,8 @@ const studentSchema = new schema({
  batch: String,
  image: String,
  startDate: String,
- endDate: String
+ endDate: String,
+ status:String
 
 }, {
  versionKey: false
@@ -27,6 +28,8 @@ const studentSchema = new schema({
 const moderatorSchema = new schema({
  email: String,
  password: String,
+ course:String,
+ batch:String,
  pin: Number,
 }, {
  versionKey: false
