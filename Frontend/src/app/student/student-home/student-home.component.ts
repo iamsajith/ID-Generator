@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-student-home',
@@ -14,8 +15,9 @@ export class StudentHomeComponent implements OnInit {
   constructor(private _actiroute: ActivatedRoute, private _route:Router, private _auth:AuthService) { }
 
   ngOnInit(): void {
+    AOS.init();
     this.id = this._actiroute.snapshot.params['id'];
-    console.log(this.id)
+    localStorage.setItem("id",this.id)
   }
 
 }

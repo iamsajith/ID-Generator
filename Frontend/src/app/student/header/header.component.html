@@ -15,15 +15,15 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/apply">Apply</a>
+          <a class="nav-link" (click)="apply()">Apply</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" >Status</a>
+          <a class="nav-link" (click)="status()" >Status</a>
         </li>
         <li class="nav-item">
           <a
             class="nav-link"
-            routerLink="/"
+            (click)="signOut()"
             >SignOut</a
           >
         </li>

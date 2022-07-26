@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { QRCodeModule } from 'angularx-qrcode';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +17,12 @@ import { HeaderComponent } from './student/header/header.component';
 import { ApplyComponent } from './student/apply/apply.component';
 import { StudentComponent } from './student/student/student.component';
 import { ForgotComponent } from './forgot/forgot.component';
+import { StatusComponent } from './student/status/status.component';
+import { HeaderModComponent } from './moderator/header-mod/header-mod.component';
+import { HeaderHistoryComponent } from './moderator/header-history/header-history.component';
+import { HeaderApplicationsComponent } from './moderator/header-applications/header-applications.component';
+import { ApplicationsComponent } from './moderator/applications/applications.component';
+import { HistoryComponent } from './moderator/history/history.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +34,23 @@ import { ForgotComponent } from './forgot/forgot.component';
     HeaderComponent,
     ApplyComponent,
     StudentComponent,
-    ForgotComponent
+    ForgotComponent,
+    StatusComponent,
+    HeaderModComponent,
+    HeaderHistoryComponent,
+    HeaderApplicationsComponent,
+    ApplicationsComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    QRCodeModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

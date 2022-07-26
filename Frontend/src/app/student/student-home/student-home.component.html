@@ -1,16 +1,24 @@
 <div class="colored-section" id="title">
-<app-header></app-header>
 <div class="container">
   <div class="row d-flex justify-content-between align-items-center">
+    
     <div class="col-md-6 d-flex flex-column align-items-center p-2">
-      <img src="assets/frontdesk.png" class="text-center w-75" alt="">
+      <div data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
+      <img src="assets/frontdesk.png" loading="lazy" class="text-center w-75" alt="">
     </div>
-    <div class="col-md-6 d-flex flex-column align-items-center p-2">
+    </div>
+    <div class="col-md-6 ">
+      <div data-aos="fade-left"
+     data-aos-offset="300"
+     class="d-flex flex-column align-items-center p-2"
+     data-aos-easing="ease-in-sine">
       <h1 class="p-2">Generate Your ICTAK ID </h1>
-      <button type="button" class="btn btn-outline-primary m-2" routerLink="/apply">
+      <button type="button" class="btn btn-outline-primary m-2 text-center" routerLink="/apply">
         Generate Now
       </button>
-
+</div>
     </div>
   </div>
 </div>
