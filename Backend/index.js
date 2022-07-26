@@ -346,7 +346,7 @@ app.post("/moderator/student", (req, res) => {
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   console.log(req.body.course)
   data = req.body
-  studentData.find({ course: data.course, batch: data.batch }, { password: 0, pin: 0 }).then((data) => {
+  studentData.find({ course: data.course, batch: data.batch, status:"Submitted" }, { password: 0, pin: 0 }).then((data) => {
     console.log(data)
     res.send(data)
   })
