@@ -28,16 +28,14 @@
            <td>{{i.endDate}}</td>
            <td></td>
            <td>
-             <button class="button btn btn-rounded-circle">
+             <button class="button btn btn-rounded-circle btn-outline-success" (click)="accept(i._id)">
               <i class="fa-solid fa-check"></i>
              </button>
            </td>
            <td>
-             <a routerLink="/update" >
-             <button class="button btn btn-rounded-circle">
+             <button class="button btn btn-rounded-circle btn-outline-danger" (click)="reject(i._id)">
               <i class="fa-solid fa-xmark"></i>
              </button>
-           </a>
            </td>
          </tr>
        </tbody>

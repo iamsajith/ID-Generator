@@ -11,9 +11,9 @@ import { StudentService } from 'src/app/student.service';
 export class StatusComponent implements OnInit {
   newdata:any
   myAngularxQrCode: string = ""
-  restricted = false
+  restricted = true
   text:string = ""
-  status= ["Pending","Approved","Rejected"]
+  // status= ["Pending","Approved","Rejected"]
 
  @ViewChild('downloadfile',{static:false}) downloadfile!:ElementRef
 
@@ -44,7 +44,9 @@ export class StatusComponent implements OnInit {
     console.log(data)
     this.newdata = JSON.parse(JSON.stringify(data))
     this.text = `Phone : ${this.newdata.phone} | Email : ${this.newdata.email} | Batch : ${this.newdata.batch} | Issue Date : ${this.newdata.startDate}`
-
+    if(this.newdata.status === 'Accepted'){
+      this.restricted = false
+    }
 
   })
 

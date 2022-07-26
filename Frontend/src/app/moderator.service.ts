@@ -14,4 +14,10 @@ export class ModeratorService {
     console.log("data",data)
     return this.http.post('http://localhost:8080/moderator/student',data)
   }
+  accept(id:any){
+    return this.http.post('http://localhost:8080/moderator/accept/'+id , null);
+  }
+  reject(id:any){
+    return this.http.post('http://localhost:8080/moderator/reject/'+id , null)
+  }
 }
