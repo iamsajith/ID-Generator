@@ -10,6 +10,7 @@ import { ModeratorService } from 'src/app/moderator.service';
 export class ApplicationsComponent implements OnInit {
   id=""
   newData:any
+  studentData:any
 
   constructor(private moderator:ModeratorService,private _actiroute:ActivatedRoute) { }
 
@@ -19,8 +20,9 @@ export class ApplicationsComponent implements OnInit {
     this.moderator.studentData(this.id).subscribe((data)=>{
       this.newData = JSON.parse(JSON.stringify(data))
       console.log(this.newData)
-      this.moderator.fetchStudent(this.newData).subscribe((data)=>{
-        console.log(data)
+      this.moderator.fetchStudent(this.newData).subscribe((studata)=>{
+        console.log(studata)
+        this.studentData = JSON.parse(JSON.stringify(studata))
       })
     })
 
