@@ -7,7 +7,7 @@ const { studentData, moderatorData, adminData } = require("./datamodel")
 const jwt = require("jsonwebtoken")
 const nodemailer = require("nodemailer")
 const { google } = require("googleapis")
-const { datacatalog } = require("googleapis/build/src/apis/datacatalog");
+// const { datacatalog } = require("googleapis/build/src/apis/datacatalog");
 
 
 
@@ -328,21 +328,24 @@ res.send(data)
   
 })
 
-app.get("moderator/:id",(req,res)=>{
-  console.log(req.params.id)
-  moderatorData.find({_id:req.params.id}).then((err,data)=>{
-    if(err){
-      console.log(err)
-    }
-    else{
-    console.log(data)
-    }
+app.get("/moderator/:id",(req,res)=>{
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+   
+  id = req.params.id
+  moderatorData.findById(id).then((data)=>{
+   
+
     res.send(data)
 })
   
 })
-app.get("moderator/student/:data",(req,res)=>{
-  studentData.find({course:req.params.course,batch:req.params.batch}).then((data)=>{
+app.post("/moderator/student",(req,res)=>{
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+  console.log(req.body.course)
+  data = req.body
+  studentData.find({course:data.course,batch:data.batch},{_id:0,password:0,pin:0}).then((data)=>{
     console.log(data)
     res.send(data)
 })

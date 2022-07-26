@@ -11,6 +11,7 @@ export class ModeratorService {
     return this.http.get('http://localhost:8080/moderator/' + id);
   }
   fetchStudent(data:any){
-    return this.http.get('http://localhost:8080/moderator/students/'+data)
+    console.log("data",data)
+    return this.http.post('http://localhost:8080/moderator/student',data)
   }
 }
