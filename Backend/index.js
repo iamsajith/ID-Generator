@@ -84,7 +84,6 @@ const sendMail = async (step, email, password) => {
     }
   }
 }
-
 // #1 Student - Authentication
 
 app.post("/student", (req, res) => {
@@ -294,7 +293,11 @@ app.put("/admin/newpassword", (req, res) => {
 app.post('/student/register', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
-
+  // const today = new Date();
+  // date = today.getFullYear()+'-'+today.getMonth()+'-'+today.getDate()
+  const d = new Date();
+  dates = d.getFullYear()+ "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2)
+  
 
   register = req.body
 
@@ -307,7 +310,8 @@ app.post('/student/register', (req, res) => {
       image: register.image,
       startDate: register.startDate,
       endDate: register.endDate,
-      status: "Submitted"
+      status: "Submitted",
+      Date: dates
     }
   }).then((data) => {
     res.send(data)
@@ -346,7 +350,7 @@ app.post("/moderator/student", (req, res) => {
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   console.log(req.body.course)
   data = req.body
-  studentData.find({ course: data.course, batch: data.batch, status:"Submitted" }, { password: 0, pin: 0 }).then((data) => {
+  studentData.find({ course: data.course,status:"Submitted" }, { password: 0, pin: 0 }).then((data) => {
     console.log(data)
     res.send(data)
   })
@@ -354,6 +358,8 @@ app.post("/moderator/student", (req, res) => {
 })
 
 app.post('/moderator/accept/:id', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   studentData.findOneAndUpdate({ _id: req.params.id }, {
     $set: {
       status: "Accepted"
@@ -366,6 +372,8 @@ app.post('/moderator/accept/:id', (req, res) => {
 })
 
 app.post('/moderator/reject/:id', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   studentData.findOneAndUpdate({ _id: req.params.id }, {
     $set: {
       status: "Rejected"
@@ -375,6 +383,20 @@ app.post('/moderator/reject/:id', (req, res) => {
     console.log(data)
     res.send(data)
   })
+})
+
+// Student History
+
+app.post("/moderator/studentHistory", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+  console.log(req.body.course)
+  data = req.body
+  studentData.find({ course: data.course}, { password: 0, pin: 0 }).then((data) => {
+    console.log(data)
+    res.send(data)
+  })
+
 })
 
 const PORT = process.env.PORT || 5000

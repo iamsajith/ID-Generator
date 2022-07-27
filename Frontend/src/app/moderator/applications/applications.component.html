@@ -8,14 +8,13 @@
           <th></th>
            <th>Name</th>
            <th>Contact</th>
-           <th>Course & Batch</th>
+           <th>Batch</th>
+           <th>Applied On</th>
            <th>Valid Upto</th>
-           <th></th>
-           <th></th>
          </tr>
        </thead>
        <tbody>
-         <tr class="align-middle" *ngFor="let i of studentData">
+         <tr class="align-middle" *ngFor="let i of studentData" >
            <td>
              <img
                [src]="i.image"
@@ -24,9 +23,9 @@
            </td>
            <td>{{i.name}}</td>
            <td>{{i.phone}}<br>{{i.email}}</td>
-           <td>{{i.course}}<br>{{i.batch}}</td>
+           <td>{{i.batch}}</td>
+           <td>{{i.Date}}</td>
            <td>{{i.endDate}}</td>
-           <td></td>
            <td>
              <button class="button btn btn-rounded-circle btn-outline-success" (click)="accept(i._id)">
               <i class="fa-solid fa-check"></i>

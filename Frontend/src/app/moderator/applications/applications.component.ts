@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModeratorService } from 'src/app/moderator.service';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-applications',
@@ -9,7 +10,7 @@ import { ModeratorService } from 'src/app/moderator.service';
 })
 export class ApplicationsComponent implements OnInit {
   id = ""
-  newData: any
+  newData: any =[]
   studentData: any
 
   constructor(private moderator: ModeratorService, private _actiroute: ActivatedRoute) { }
@@ -28,9 +29,11 @@ export class ApplicationsComponent implements OnInit {
 
   }
 
-  accept(id: any) {
-    this.moderator.accept(id).subscribe(() => {
+  accept(id:any) {
+    this.moderator.accept(id).subscribe((data) => {
+      // AOS.init();
       console.log("Accepted")
+      // this.newData = this.newData.filter((p: any)=>p!=this.id)
     })
   }
 
