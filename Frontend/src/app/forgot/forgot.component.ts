@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import * as AOS from 'aos';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forgot',
@@ -22,8 +21,7 @@ export class ForgotComponent implements OnInit {
   constructor(
     private _actiroute: ActivatedRoute,
     private forgot: AuthService,
-    private _route: Router,
-    private toaster:ToastrService
+    private _route: Router
   ) { }
 
   ngOnInit(): void {
@@ -31,33 +29,14 @@ export class ForgotComponent implements OnInit {
    }
   getpin() {
     if (this.data.role === "Student") {
-      this.forgot.studentforgot(this.data).subscribe((data)=>{
-        if(data != null){
-        this.toaster.success("Success")
-        }
-        else{
-          this.toaster.error("Failed")
-        }
-      })
+      this.forgot.studentforgot(this.data).subscribe()
     }
     else if (this.data.role === "Batch Manager") {
-      this.forgot.moderatorforgot(this.data).subscribe((data)=>{
-        if(data != null){
-          this.toaster.success("Success")
-          }
-          else{
-            this.toaster.error("Failed")
-          }
-      })
+      this.forgot.moderatorforgot(this.data).subscribe()
     }
     else if (this.data.role === "Admin") {
-      this.forgot.adminforgot(this.data).subscribe((data) => {
-        if(data != null){
-          this.toaster.success("Success")
-          }
-          else{
-            this.toaster.error("Failed")
-          }
+      this.forgot.adminforgot(this.data).subscribe(() => {
+
       })
 
     }

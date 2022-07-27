@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { BatchComponent } from './admin/batch/batch.component';
+import { ControlsComponent } from './admin/controls/controls.component';
+import { HeaderBatchComponent } from './admin/header-batch/header-batch.component';
+import { HeaderControlsComponent } from './admin/header-controls/header-controls.component';
 import { AuthGuard } from './auth.guard';
 import { ForgotComponent } from './forgot/forgot.component';
 import { LoginComponent } from './login/login.component';
@@ -16,7 +20,7 @@ import { StudentComponent } from './student/student/student.component';
 
 const routes: Routes = [{path:"",component:LoginComponent},{path:"newpassword",component:ForgotComponent},{path:"student/:id",canActivate:[AuthGuard], component:StudentComponent,children:[{path:"",component:StudentHomeComponent},{path:"apply",component:ApplyComponent},{path:"status",component:StatusComponent}]},{
   path:"moderator/:id",canActivate:[AuthGuard],component:ModeratorHomeComponent,children:[{path:"",component:ApplicationsComponent,children:[{path:"",component:HeaderApplicationsComponent}]},{path:"history",component:HistoryComponent,children:[{path:"",component:HeaderHistoryComponent}]}]
-},{path:"admin/:id",component:AdminHomeComponent}];
+},{path:"admin/:id",canActivate:[AuthGuard],component:AdminHomeComponent,children:[{path:"",component:BatchComponent,children:[{path:"",component:HeaderBatchComponent}]},{path:"controls",component:ControlsComponent,children:[{path:"",component:HeaderControlsComponent}]}]}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
