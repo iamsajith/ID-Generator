@@ -1,7 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-const dotenv = require("dotenv").config({path: "./vars/.env"})
+const dotenv = require("dotenv").config({path: "./vars/env"})
 const path = require('path');
 const { studentData, moderatorData, adminData } = require("./datamodel")
 const jwt = require("jsonwebtoken")
