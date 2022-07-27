@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import * as AOS from 'aos';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  constructor(private _auth: AuthService, private _router: Router,private toastr: ToastrService) {
+  constructor(private _auth: AuthService, private _router: Router) {
     
   }
 
@@ -29,17 +29,10 @@ export class LoginComponent implements OnInit {
     const x: string = this.User.password.slice(3, 6).toLowerCase();
     if (x === 'stu') {
       this._auth.studentcheck(this.User).subscribe((data) => {
-        if(data != null){
-        this.toastr.success("You can now apply ID Card","Success")
         const info = JSON.parse(JSON.stringify(data));
-        console.log(data)
         localStorage.setItem('token', info.token);
         localStorage.setItem('url', `/student/${info.data}/`);
         this._router.navigate(['/student/', info.data]);
-        }
-        else{
-          this.toastr.error("Error Occured")
-        }
       });
     } else if (x === 'mod') {
       this._auth.moderatorcheck(this.User).subscribe((data) => {
@@ -57,7 +50,7 @@ export class LoginComponent implements OnInit {
         this._router.navigate(['/admin/', info.data]);
       });
     } else {
-     
+      window.location.reload();
     }
   };
 }

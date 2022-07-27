@@ -15,12 +15,3 @@ th{
  color: #555;
  text-align: center;
 }
-td{
- text-align: center;
-}
-.btn-outline-danger:hover{
- color:red;
-}
-.btn-outline-success:hover{
- color: green;
-}
