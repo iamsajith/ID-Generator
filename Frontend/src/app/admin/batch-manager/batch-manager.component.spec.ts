@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderBatchComponent } from './header-batch.component';
+import { BatchManagerComponent } from './batch-manager.component';
 
-describe('HeaderBatchComponent', () => {
-  let component: HeaderBatchComponent;
-  let fixture: ComponentFixture<HeaderBatchComponent>;
+describe('BatchManagerComponent', () => {
+  let component: BatchManagerComponent;
+  let fixture: ComponentFixture<BatchManagerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderBatchComponent ]
+      declarations: [ BatchManagerComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HeaderBatchComponent);
+    fixture = TestBed.createComponent(BatchManagerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

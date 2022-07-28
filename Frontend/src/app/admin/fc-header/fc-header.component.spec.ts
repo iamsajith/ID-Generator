@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewBatchComponent } from './new-batch.component';
+import { FcHeaderComponent } from './fc-header.component';
 
-describe('NewBatchComponent', () => {
-  let component: NewBatchComponent;
-  let fixture: ComponentFixture<NewBatchComponent>;
+describe('FcHeaderComponent', () => {
+  let component: FcHeaderComponent;
+  let fixture: ComponentFixture<FcHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewBatchComponent ]
+      declarations: [ FcHeaderComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NewBatchComponent);
+    fixture = TestBed.createComponent(FcHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,9 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { QRCodeModule } from 'angularx-qrcode';
+import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ToastrModule } from 'ngx-toastr';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,21 +23,13 @@ import { HeaderHistoryComponent } from './moderator/header-history/header-histor
 import { HeaderApplicationsComponent } from './moderator/header-applications/header-applications.component';
 import { ApplicationsComponent } from './moderator/applications/applications.component';
 import { HistoryComponent } from './moderator/history/history.component';
-import { HeaderBatchComponent } from './admin/header-batch/header-batch.component';
-import { HeaderControlsComponent } from './admin/header-controls/header-controls.component';
-import { BatchComponent } from './admin/batch/batch.component';
-import { ControlsComponent } from './admin/controls/controls.component';
+import { NewmanagerComponent } from './admin/newmanager/newmanager.component';
+import { BatchManagerComponent } from './admin/batch-manager/batch-manager.component';
+import { FormControlComponent } from './admin/form-control/form-control.component';
+import { FcHeaderComponent } from './admin/fc-header/fc-header.component';
+import { NmHeaderComponent } from './admin/nm-header/nm-header.component';
+import { BmHeaderComponent } from './admin/bm-header/bm-header.component';
 import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
-import { NewBatchComponent } from './admin/new-batch/new-batch.component';
-import { AdminService } from './admin.service';
-import { MaterialModule } from './material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormField} from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -55,15 +48,13 @@ import { MatInputModule } from '@angular/material/input';
     HeaderApplicationsComponent,
     ApplicationsComponent,
     HistoryComponent,
-    HeaderBatchComponent,
-    HeaderControlsComponent,
-    BatchComponent,
-    ControlsComponent,
-    HeaderAdminComponent,
-    NewBatchComponent,
-    
-    
-  
+    NewmanagerComponent,
+    BatchManagerComponent,
+    FormControlComponent,
+    FcHeaderComponent,
+    NmHeaderComponent,
+    BmHeaderComponent,
+    HeaderAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -71,16 +62,11 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     HttpClientModule,
     QRCodeModule,
+    CommonModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    MaterialModule,
-    ReactiveFormsModule,
-  
-
-    
   ],
-  providers: [AdminService],
-  bootstrap: [AppComponent],
-  entryComponents:[NewBatchComponent]
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

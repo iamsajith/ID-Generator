@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BatchComponent } from './batch.component';
+import { NmHeaderComponent } from './nm-header.component';
 
-describe('BatchComponent', () => {
-  let component: BatchComponent;
-  let fixture: ComponentFixture<BatchComponent>;
+describe('NmHeaderComponent', () => {
+  let component: NmHeaderComponent;
+  let fixture: ComponentFixture<NmHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BatchComponent ]
+      declarations: [ NmHeaderComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BatchComponent);
+    fixture = TestBed.createComponent(NmHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
