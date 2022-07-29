@@ -23,6 +23,13 @@ import { HeaderHistoryComponent } from './moderator/header-history/header-histor
 import { HeaderApplicationsComponent } from './moderator/header-applications/header-applications.component';
 import { ApplicationsComponent } from './moderator/applications/applications.component';
 import { HistoryComponent } from './moderator/history/history.component';
+import { NewmanagerComponent } from './admin/newmanager/newmanager.component';
+import { BatchManagerComponent } from './admin/batch-manager/batch-manager.component';
+import { FormControlComponent } from './admin/form-control/form-control.component';
+import { FcHeaderComponent } from './admin/fc-header/fc-header.component';
+import { NmHeaderComponent } from './admin/nm-header/nm-header.component';
+import { BmHeaderComponent } from './admin/bm-header/bm-header.component';
+import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +47,14 @@ import { HistoryComponent } from './moderator/history/history.component';
     HeaderHistoryComponent,
     HeaderApplicationsComponent,
     ApplicationsComponent,
-    HistoryComponent
+    HistoryComponent,
+    NewmanagerComponent,
+    BatchManagerComponent,
+    FormControlComponent,
+    FcHeaderComponent,
+    NmHeaderComponent,
+    BmHeaderComponent,
+    HeaderAdminComponent
   ],
   imports: [
     BrowserModule,

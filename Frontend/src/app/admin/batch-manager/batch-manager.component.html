@@ -1,0 +1,45 @@
+<div class="card mx-5">
+ <router-outlet></router-outlet>
+ <div class="card-body">
+   <div class="table-responsive">
+     <table class="table">
+       <thead class="thead-light">
+         <tr class="align-middle">
+           <th></th>
+           <th>Name</th>
+           <th>Contact</th>
+           <th>Batch</th>
+           <th>Applied On</th>
+           <th>Valid Upto</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr class="align-middle" *ngFor="let i of studentData">
+           <td>
+             <img [src]="i.image" alt="image" />
+           </td>
+           <td>{{ i.name }}</td>
+           <td>{{ i.phone }}<br />{{ i.email }}</td>
+           <td>{{ i.batch }}</td>
+           <td>{{ i.Date }}</td>
+           <td>{{ i.endDate }}</td>
+           <td>
+             <button
+               class="button btn btn-rounded-circle btn-outline-success"
+             >
+               <i class="fa-solid fa-check"></i>
+             </button>
+           </td>
+           <td>
+             <button
+               class="button btn btn-rounded-circle btn-outline-danger"
+             >
+               <i class="fa-solid fa-xmark"></i>
+             </button>
+           </td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+ </div>
+</div>

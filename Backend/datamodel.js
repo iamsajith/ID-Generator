@@ -19,7 +19,8 @@ const studentSchema = new schema({
  image: String,
  startDate: String,
  endDate: String,
- status:String
+ status:String,
+ Date:String
 
 }, {
  versionKey: false

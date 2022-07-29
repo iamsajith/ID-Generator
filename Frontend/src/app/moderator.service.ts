@@ -20,4 +20,10 @@ export class ModeratorService {
   reject(id:any){
     return this.http.post('http://localhost:8080/moderator/reject/'+id , null)
   }
+
+  studentHistory(data:any){
+    return this.http.post('http://localhost:8080/moderator/studentHistory',data)
+
+  }
+
 }
