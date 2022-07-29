@@ -7,7 +7,7 @@
          <tr class="align-middle">
           <th></th>
            <th>Name</th>
-           <th>Phone & E-mail</th>
+           <th>Contact</th>
            <th>Course & Batch</th>
            <th>Valid Upto</th>
            <th></th>
@@ -15,29 +15,27 @@
          </tr>
        </thead>
        <tbody>
-         <tr class="align-middle">
+         <tr class="align-middle" *ngFor="let i of studentData">
            <td>
              <img
-               [src]=""
+               [src]="i.image"
                alt="image"
              />
            </td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
+           <td>{{i.name}}</td>
+           <td>{{i.phone}}<br>{{i.email}}</td>
+           <td>{{i.course}}<br>{{i.batch}}</td>
+           <td>{{i.endDate}}</td>
            <td></td>
            <td>
-             <button class="button btn btn-rounded-circle">
+             <button class="button btn btn-rounded-circle btn-outline-success" (click)="accept(i._id)">
               <i class="fa-solid fa-check"></i>
              </button>
            </td>
            <td>
-             <a routerLink="/update" >
-             <button class="button btn btn-rounded-circle">
+             <button class="button btn btn-rounded-circle btn-outline-danger" (click)="reject(i._id)">
               <i class="fa-solid fa-xmark"></i>
              </button>
-           </a>
            </td>
          </tr>
        </tbody>

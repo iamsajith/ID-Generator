@@ -7,7 +7,8 @@ const { studentData, moderatorData, adminData } = require("./datamodel")
 const jwt = require("jsonwebtoken")
 const nodemailer = require("nodemailer")
 const { google } = require("googleapis")
-const { datacatalog } = require("googleapis/build/src/apis/datacatalog");
+const multer = require('multer');
+// const { datacatalog } = require("googleapis/build/src/apis/datacatalog");
 
 
 
@@ -104,7 +105,7 @@ app.post("/student", (req, res) => {
       res.status(200).send({ token: token, data: user._id });
     }
     else {
-      res.status(401).send('Wrong Credentials')
+      res.send(user)
     }
   });
 });
@@ -128,7 +129,7 @@ app.post("/moderator", (req, res) => {
       res.status(200).send({ token, data: user._id });
     }
     else {
-      res.status(401).send('Wrong Credentials')
+      res.send(user)
     }
   });
 });
@@ -152,7 +153,7 @@ app.post("/admin", (req, res) => {
       res.status(200).send({ token, data: user._id });
     }
     else {
-      res.status(401).send('Wrong Credentials')
+      res.send(user)
     }
   });
 });
@@ -166,15 +167,15 @@ app.post("/student/pin", (req, res) => {
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   studentData.findOneAndUpdate({ email: req.body.email }, { $set: { pin: randomPin } }).then((data) => {
 
-  if(data != null){
-    const mail = req.body.email
-    sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
-      .catch((error) => { console.log(error) })
-    res.status(200).send()
-  }
-  else{
-    res.status(404).send()
-  }
+    if (data != null) {
+      const mail = req.body.email
+      sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
+        .catch((error) => { console.log(error) })
+      res.send(data)
+    }
+    else {
+      res.send(data)
+    }
   })
 
 })
@@ -190,10 +191,10 @@ app.post("/student/newpassword", (req, res) => {
       const mail = req.body.email
       sendMail(step = 1, mail, studentnew).then((result) => console.log(result))
         .catch((error) => { console.log(error) })
-      res.send()
+      res.send(data)
     }
     else {
-      res.status(404).send("Data not found")
+      res.send(data)
     }
   })
 
@@ -209,17 +210,17 @@ app.post("/moderator/pin", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   moderatorData.findOneAndUpdate({ email: req.body.email }, { $set: { pin: randomPin } }).then((data) => {
-    if(data != null){
-    console.log(data)
-    const mail = req.body.email
-    sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
-      .catch((error) => { console.log(error) })
-    res.status(200).send()
+    if (data != null) {
+      console.log(data)
+      const mail = req.body.email
+      sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
+        .catch((error) => { console.log(error) })
+      res.send(data)
     }
-    else{
-      res.status(404).send()
+    else {
+      res.send(data)
     }
-    
+
   })
 
 })
@@ -235,10 +236,10 @@ app.post("/moderator/newpassword", (req, res) => {
       const mail = req.body.email
       sendMail(step = 1, mail, moderatornew).then((result) => console.log(result))
         .catch((error) => { console.log(error) })
-      res.send()
+      res.send(data)
     }
     else {
-      res.status(404).send("Data not found")
+      res.send(data)
     }
   })
 
@@ -254,15 +255,15 @@ app.post("/admin/pin", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   adminData.findOneAndUpdate({ email: req.body.email }, { $set: { pin: randomPin } }).then((data) => {
-    if(data != null){
-    console.log(data)
-    const mail = req.body.email
-    sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
-      .catch((error) => { console.log(error) })
-    res.status(200).send()
+    if (data != null) {
+      console.log(data)
+      const mail = req.body.email
+      sendMail(step = 0, mail, randomPin).then((result) => console.log("Send Successfully", result))
+        .catch((error) => { console.log(error) })
+      res.send(data)
     }
-    else{
-      res.status(404).send()
+    else {
+      res.send(data)
     }
   })
 
@@ -280,10 +281,10 @@ app.put("/admin/newpassword", (req, res) => {
       const mail = req.body.email
       sendMail(step = 1, mail, adminnew).then((result) => console.log(result))
         .catch((error) => { console.log(error) })
-      res.send()
+      res.send(data)
     }
     else {
-      res.status(404).send("Data not found")
+      res.send(data)
     }
   })
 
@@ -291,44 +292,118 @@ app.put("/admin/newpassword", (req, res) => {
 
 })
 
+var storage = multer.diskStorage({
+  destination: function (req, res, cb) {
+    cb(null, './public/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname))
+  }
+});
+
+
+
+
+
+
+
+
 app.post('/student/register', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
-   
+
 
   register = req.body
+
+  var upload = multer({ storage: storage }).single('image');
+    upload(req, res, (err) => {
+      if(err){
+        console.log(err)
+      }
+      else{
+
+      
 
   studentData.findOneAndUpdate({ email: register.email }, {
     $set: {
       name: register.name,
       phone: register.phone,
-      course:register.course,
+      course: register.course,
       batch: register.batch,
       image: register.image,
       startDate: register.startDate,
-      endDate: register.endDate
+      endDate: register.endDate,
+      status: "Submitted"
     }
   }).then((data) => {
-    res.send()
+    res.send(data)
 
+  })
+}
+    })
+
+})
+
+app.get("/idcard/:id", (req, res) => {
+
+
+  studentData.findOne({ _id: req.params.id }, { password: 0, pin: 0, _id: 0, image: 0 }).then((data) => {
+
+
+    res.send(data)
+  })
+
+
+
+})
+
+app.get("/moderator/:id", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+
+  id = req.params.id
+  moderatorData.findById(id).then((data) => {
+
+
+    res.send(data)
+  })
+
+})
+app.post("/moderator/student", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+  console.log(req.body.course)
+  data = req.body
+  studentData.find({ course: data.course, status:"Submitted" }, { password: 0, pin: 0 }).then((data) => {
+    console.log(data)
+    res.send(data)
   })
 
 })
 
-app.get("/idcard/:id",(req,res)=>{
-
-
-  studentData.findOne({_id:req.params.id},{password:0,pin:0,_id:0,image:0}).then((data)=>{
-   
-
-res.send(data)
+app.post('/moderator/accept/:id', (req, res) => {
+  studentData.findOneAndUpdate({ _id: req.params.id }, {
+    $set: {
+      status: "Accepted"
+    }
+  }
+  ).then((data) => {
+    console.log(data)
+    res.send(data)
   })
-
-
-  
 })
 
-
+app.post('/moderator/reject/:id', (req, res) => {
+  studentData.findOneAndUpdate({ _id: req.params.id }, {
+    $set: {
+      status: "Rejected"
+    }
+  }
+  ).then((data) => {
+    console.log(data)
+    res.send(data)
+  })
+})
 
 const PORT = process.env.PORT || 5000
 
