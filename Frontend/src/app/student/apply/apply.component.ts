@@ -12,48 +12,40 @@ import { Observable, Subscriber } from 'rxjs';
 })
 export class ApplyComponent implements OnInit {
 
+  url:any = ""
+
   courses = ["FSD", "Data Science", "AI & ML", "Software Testing"]
   batches = ["KKEM-FEB-2022", "ABCD-B1-MAR-2022", "ABCD-B2-MAR-2022", "KKEM-MAY-2022"]
 
-  data: any = new RegistrationModel("", "", "", "", "", "", "")
+  data: any = new RegistrationModel("", "", "", "", "", "")
+  
 
-  myimage: Observable<any>;
-
-  onChange($event: Event) {
-    const file = ($event.target as HTMLInputElement).files[0];
-    this.convertToBase64(file);
-  }
-
-  convertToBase64(file: File) {
-    this.myimage = new Observable((subscriber: Subscriber<any>) => {
-      this.readFile(file, subscriber);
-    });
-  }
-
-  readFile(file: File, subscriber: Subscriber<any>) {
-    const filereader = new FileReader();
-    filereader.readAsDataURL(file);
-
-    filereader.onload = () => {
-      subscriber.next(filereader.result);
-      subscriber.complete();
-    };
-    filereader.onerror = (error) => {
-      subscriber.error(error);
-      subscriber.complete();
-    };
-  }
-
+  
 
   constructor(private _student: StudentService,private toaster:ToastrService) { }
 
   ngOnInit(): void {
     AOS.init();
   }
+  selectFile(event:any){
+    if(!event.target.files[0] || event.target.files[0].length === 0){
+      return
+    }
+    let mimeType = event.target.files[0].type;
+    if(mimeType.match(/image\/*/)==null){
+      return
+    }
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event)=>{
+      this.url = reader.result
+      console.log(this.url)
+    }
+  }
 
 
   Register() {
-    this._student.studentRegister(this.data).subscribe((data) => {
+    this._student.studentRegister({data:this.data,url:this.url}).subscribe((data) => {
       if(data != null){
         this.toaster.success("Your application is submitted","Success")
       }
@@ -62,6 +54,8 @@ this.toaster.error("Error while submitting","Error")
       }
     })
   }
+
+
 
 
 

@@ -13,7 +13,9 @@ const { google } = require("googleapis")
 
 const app = new express();
 app.use(cors());
-app.use(express.json({ urlencoded: true }));
+// app.use(express.json({limit: '50mb', urlencoded: true }));
+app.use(express.json({ limit: '200mb' }))
+// app.use(myParser.text({ limit: '200mb' }));
 
 
 
@@ -299,7 +301,8 @@ app.post('/student/register', (req, res) => {
   dates = d.getFullYear()+ "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2)
   
 
-  register = req.body
+  register = req.body.data
+  // image = 
 
   studentData.findOneAndUpdate({ email: register.email }, {
     $set: {
@@ -307,7 +310,7 @@ app.post('/student/register', (req, res) => {
       phone: register.phone,
       course: register.course,
       batch: register.batch,
-      image: register.image,
+      image: req.body.url,
       startDate: register.startDate,
       endDate: register.endDate,
       status: "Submitted",
@@ -323,7 +326,7 @@ app.post('/student/register', (req, res) => {
 app.get("/idcard/:id", (req, res) => {
 
 
-  studentData.findOne({ _id: req.params.id }, { password: 0, pin: 0, _id: 0, image: 0 }).then((data) => {
+  studentData.findOne({ _id: req.params.id }, { password: 0, pin: 0, _id: 0}).then((data) => {
 
 
     res.send(data)

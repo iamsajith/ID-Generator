@@ -43,6 +43,7 @@ export class StatusComponent implements OnInit {
   this._student.getID(id).subscribe((data)=>{
     console.log(data)
     this.newdata = JSON.parse(JSON.stringify(data))
+    console.log(this.newdata)
     this.text = `Phone : ${this.newdata.phone} | Email : ${this.newdata.email} | Batch : ${this.newdata.batch} | Issue Date : ${this.newdata.startDate}`
     if(this.newdata.status === 'Accepted'){
       this.restricted = false

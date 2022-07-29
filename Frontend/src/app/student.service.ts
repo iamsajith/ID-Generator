@@ -8,6 +8,7 @@ export class StudentService {
 
   constructor(private _http: HttpClient) { }
   studentRegister(data:any){
+    console.log(data.data.name)
     return this._http.post("http://localhost:8080/student/register",data)
   }
   getID(id:any){

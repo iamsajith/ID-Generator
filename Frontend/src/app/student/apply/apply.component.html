@@ -77,19 +77,16 @@
               name="file"
               id="file"
               accept="image/*"
+              (change)="selectFile($event)"
               placeholder="Photo"
-              (change)="onChange($event)"
-              [(ngModel)]="data.image"
-              #image="ngModel"
-              [class.is-invalid]="image.invalid && image.touched"
               required
             />
-            <small [class.d-none]="image.valid" class="px-3 text-danger"
+            <!-- <small [class.d-none]="image.valid" class="px-3 text-danger"
               >χ</small
             >
             <small [class.d-none]="image.invalid" class="px-3 text-success"
               >✓</small
-            >
+            > -->
           </div>
         </div>
         <div class="col-sm mx-1">

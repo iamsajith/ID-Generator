@@ -24,3 +24,7 @@ td{
 .btn-outline-success:hover{
  color: green;
 }
+img{
+ width: 50px;
+ height: auto;
+}
