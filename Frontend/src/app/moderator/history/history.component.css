@@ -23,3 +23,11 @@ span{
  border-radius: 5px;
  color: white;
 }
+img{
+ width: 50px;
+ border-radius: 50%;
+}
+.exceldownload{
+ text-align: end;
+ padding-right: 5%;
+}

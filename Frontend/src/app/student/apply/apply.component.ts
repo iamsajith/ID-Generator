@@ -12,32 +12,32 @@ import { Observable, Subscriber } from 'rxjs';
 })
 export class ApplyComponent implements OnInit {
 
-  url:any = ""
+  url: any = ""
 
   courses = ["FSD", "Data Science", "AI & ML", "Software Testing"]
   batches = ["KKEM-FEB-2022", "ABCD-B1-MAR-2022", "ABCD-B2-MAR-2022", "KKEM-MAY-2022"]
 
   data: any = new RegistrationModel("", "", "", "", "", "")
-  
 
-  
 
-  constructor(private _student: StudentService,private toaster:ToastrService) { }
+
+
+  constructor(private _student: StudentService, private toaster: ToastrService) { }
 
   ngOnInit(): void {
     AOS.init();
   }
-  selectFile(event:any){
-    if(!event.target.files[0] || event.target.files[0].length === 0){
+  selectFile(event: any) {
+    if (!event.target.files[0] || event.target.files[0].length === 0) {
       return
     }
     let mimeType = event.target.files[0].type;
-    if(mimeType.match(/image\/*/)==null){
+    if (mimeType.match(/image\/*/) == null) {
       return
     }
     let reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (_event)=>{
+    reader.onload = (_event) => {
       this.url = reader.result
       console.log(this.url)
     }
@@ -45,12 +45,12 @@ export class ApplyComponent implements OnInit {
 
 
   Register() {
-    this._student.studentRegister({data:this.data,url:this.url}).subscribe((data) => {
-      if(data != null){
-        this.toaster.success("Your application is submitted","Success")
+    this._student.studentRegister({ data: this.data, url: this.url }).subscribe((data) => {
+      if (data != null) {
+        this.toaster.success("Your application is submitted", "Success")
       }
-      else{
-this.toaster.error("Error while submitting","Error")
+      else {
+        this.toaster.error("Error while submitting", "Error")
       }
     })
   }

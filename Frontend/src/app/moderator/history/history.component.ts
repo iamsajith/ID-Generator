@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModeratorService } from 'src/app/moderator.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-history',
@@ -7,9 +8,10 @@ import { ModeratorService } from 'src/app/moderator.service';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  // id = ""
   newData: any =[]
   studentData: any
+  title = 'angular-app';
+  fileName= 'applications.xlsx';
 
   constructor(private moderator:ModeratorService) { }
 
@@ -25,4 +27,15 @@ export class HistoryComponent implements OnInit {
 
 })
     }
+
+    exportexcel(): void
+  {
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, this.fileName);
+  }
+
+
   }

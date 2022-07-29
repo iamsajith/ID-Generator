@@ -2,7 +2,10 @@
   <router-outlet></router-outlet>
   <div class="card-body">
     <div class="table-responsive">
-      <table class="table">
+      <div class="exceldownload">
+      <button class="btn " (click)="exportexcel()"><i class="fa-solid fa-download"></i></button>
+      </div>
+      <table class="table" id="excel-table">
         <thead class="thead-light">
           <tr class="align-middle">
            <th></th>
@@ -23,7 +26,7 @@
               />
             </td>
             <td>{{i.name}}</td>
-            <td>{{i.phone}}<br>{{i.email}}</td>
+            <td>{{i.phone}}</td>
             <td>{{i.batch}}</td>
             <td>{{i.Date}}</td>
             <td>{{i.endDate}}</td>
