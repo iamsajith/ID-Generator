@@ -15,10 +15,25 @@ export class ApplyComponent implements OnInit {
   batches = ["KKEM-FEB-2022", "ABCD-B1-MAR-2022", "ABCD-B2-MAR-2022", "KKEM-MAY-2022"]
 
   data: any = new RegistrationModel("", "", "", "", "", "", "")
-
+  url="string"
 
   constructor(private _student: StudentService,private toaster:ToastrService) { }
 
+  onFileSelected(event:any){
+    
+    if(event.target.files){
+      var reader=new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload=(e:any)=>{
+        this.url=e.target.result;
+        console.log("error image",this.url);
+        
+      }
+      this.data.image=event.target.files[0];
+      console.log("error image");
+    }
+    
+  }
   ngOnInit(): void {
     AOS.init();
   }
