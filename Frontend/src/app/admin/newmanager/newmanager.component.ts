@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./newmanager.component.css']
 })
 export class NewmanagerComponent implements OnInit {
+  studentData:any
 
   constructor() { }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bm-header',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BmHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router:Router) { }
 
   ngOnInit(): void {
+  }
+  newmanagers(){
+    let url = localStorage.getItem("url")
+this._router.navigate([`${url}/newmanager`])
+
+  }
+  
+  formcontrols(){
+    let url = localStorage.getItem("url")
+this._router.navigate([`${url}/formcontrol`])
+
   }
 
 }

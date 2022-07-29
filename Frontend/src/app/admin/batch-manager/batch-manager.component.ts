@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./batch-manager.component.css']
 })
 export class BatchManagerComponent implements OnInit {
+  studentData:any
 
   constructor() { }
 

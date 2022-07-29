@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-control.component.css']
 })
 export class FormControlComponent implements OnInit {
+  studentData:any
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
 }
