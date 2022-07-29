@@ -3,6 +3,7 @@ import { RegistrationModel } from 'src/app/Model/student.model';
 import { StudentService } from 'src/app/student.service';
 import * as AOS from 'aos';
 import { ToastrService } from 'ngx-toastr';
+import { Observable, Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-apply',
@@ -15,28 +16,42 @@ export class ApplyComponent implements OnInit {
   batches = ["KKEM-FEB-2022", "ABCD-B1-MAR-2022", "ABCD-B2-MAR-2022", "KKEM-MAY-2022"]
 
   data: any = new RegistrationModel("", "", "", "", "", "", "")
-  url="string"
+
+  myimage: Observable<any>;
+
+  onChange($event: Event) {
+    const file = ($event.target as HTMLInputElement).files[0];
+    this.convertToBase64(file);
+  }
+
+  convertToBase64(file: File) {
+    this.myimage = new Observable((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+    });
+  }
+
+  readFile(file: File, subscriber: Subscriber<any>) {
+    const filereader = new FileReader();
+    filereader.readAsDataURL(file);
+
+    filereader.onload = () => {
+      subscriber.next(filereader.result);
+      subscriber.complete();
+    };
+    filereader.onerror = (error) => {
+      subscriber.error(error);
+      subscriber.complete();
+    };
+  }
+
 
   constructor(private _student: StudentService,private toaster:ToastrService) { }
 
-  onFileSelected(event:any){
-    
-    if(event.target.files){
-      var reader=new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload=(e:any)=>{
-        this.url=e.target.result;
-        console.log("error image",this.url);
-        
-      }
-      this.data.image=event.target.files[0];
-      console.log("error image");
-    }
-    
-  }
   ngOnInit(): void {
     AOS.init();
   }
+
+
   Register() {
     this._student.studentRegister(this.data).subscribe((data) => {
       if(data != null){

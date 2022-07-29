@@ -1,13 +1,12 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-const dotenv = require("dotenv").config({path: "./vars/env"})
+const dotenv = require("dotenv").config({ path: "./vars/.env" })
 const path = require('path');
 const { studentData, moderatorData, adminData } = require("./datamodel")
 const jwt = require("jsonwebtoken")
 const nodemailer = require("nodemailer")
 const { google } = require("googleapis")
-const multer = require('multer');
 // const { datacatalog } = require("googleapis/build/src/apis/datacatalog");
 
 
@@ -291,22 +290,6 @@ app.put("/admin/newpassword", (req, res) => {
 
 })
 
-var storage = multer.diskStorage({
-  destination: function (req, res, cb) {
-    cb(null, './public/images')
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname))
-  }
-});
-
-
-
-
-
-
-
-
 app.post('/student/register', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
@@ -317,15 +300,6 @@ app.post('/student/register', (req, res) => {
   
 
   register = req.body
-
-  var upload = multer({ storage: storage }).single('image');
-    upload(req, res, (err) => {
-      if(err){
-        console.log(err)
-      }
-      else{
-
-      
 
   studentData.findOneAndUpdate({ email: register.email }, {
     $set: {
@@ -343,8 +317,6 @@ app.post('/student/register', (req, res) => {
     res.send(data)
 
   })
-}
-    })
 
 })
 
@@ -378,7 +350,7 @@ app.post("/moderator/student", (req, res) => {
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   console.log(req.body.course)
   data = req.body
-  studentData.find({ course: data.course, status:"Submitted" }, { password: 0, pin: 0 }).then((data) => {
+  studentData.find({ course: data.course,status:"Submitted" }, { password: 0, pin: 0 }).then((data) => {
     console.log(data)
     res.send(data)
   })
