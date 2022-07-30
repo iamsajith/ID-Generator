@@ -13,9 +13,9 @@ import { Observable, Subscriber } from 'rxjs';
 export class ApplyComponent implements OnInit {
 
   url: any = ""
-
-  courses = ["FSD", "Data Science", "AI & ML", "Software Testing"]
-  batches = ["KKEM-FEB-2022", "ABCD-B1-MAR-2022", "ABCD-B2-MAR-2022", "KKEM-MAY-2022"]
+  array:any
+  courses:any
+  batches:any
 
   data: any = new RegistrationModel("", "", "", "", "", "")
 
@@ -26,6 +26,13 @@ export class ApplyComponent implements OnInit {
 
   ngOnInit(): void {
     AOS.init();
+    this._student.getCourses().subscribe((data)=>{
+      this.array = JSON.parse(JSON.stringify(data))
+      this.courses = this.array[0].course
+      this.batches = this.array[0].batch
+      console.log(this.batches[0])
+    })
+
   }
   selectFile(event: any) {
     if (!event.target.files[0] || event.target.files[0].length === 0) {

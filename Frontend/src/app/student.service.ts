@@ -14,5 +14,8 @@ export class StudentService {
   getID(id:any){
     return this._http.get("http://localhost:8080/idcard/"+id)
   }
+  getCourses(){
+    return this._http.get("http://localhost:8080/courses")
+  }
 
 }
