@@ -12,13 +12,6 @@ export class HeaderModComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  // apply(){
-  //   this._router.navigate([`/${localStorage.getItem("url")}/apply`])
-  // }
-  // status(){
-
-  //   this._router.navigate([`/${localStorage.getItem("url")}/status`])
-  // }
   signOut(){
     localStorage.removeItem("url")
     localStorage.removeItem("token")
