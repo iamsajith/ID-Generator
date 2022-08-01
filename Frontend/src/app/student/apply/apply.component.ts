@@ -3,7 +3,6 @@ import { RegistrationModel } from 'src/app/Model/student.model';
 import { StudentService } from 'src/app/student.service';
 import * as AOS from 'aos';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-apply',
