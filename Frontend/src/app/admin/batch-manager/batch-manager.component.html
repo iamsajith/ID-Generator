@@ -5,38 +5,22 @@
      <table class="table">
        <thead class="thead-light">
          <tr class="align-middle">
-           <th></th>
            <th>NAME</th>
            <th>CONTACT</th>
            <th>DESIGNATION</th>
            <th>JOINING DATE</th>
            <th>COURSE</th>
+           <th>BATCH</th>
          </tr>
        </thead>
        <tbody>
-         <tr class="align-middle" *ngFor="let i of studentData">
-           <td>
-             <img [src]="i.image" alt="image" />
-           </td>
+         <tr class="align-middle" *ngFor="let i of moderatorData">
            <td>{{ i.name }}</td>
            <td>{{ i.phone }}<br />{{ i.email }}</td>
-           <td>{{ i.batch }}</td>
-           <td>{{ i.Date }}</td>
-           <td>{{ i.endDate }}</td>
-           <td>
-             <button
-               class="button btn btn-rounded-circle btn-outline-success"
-             >
-               <i class="fa-solid fa-check"></i>
-             </button>
-           </td>
-           <td>
-             <button
-               class="button btn btn-rounded-circle btn-outline-danger"
-             >
-               <i class="fa-solid fa-xmark"></i>
-             </button>
-           </td>
+           <td>{{ i.designation }}</td>
+           <td>{{ i.join }}</td>
+           <td>{{ i.course }}</td>
+           <td>{{i.batch}}</td>
          </tr>
        </tbody>
      </table>

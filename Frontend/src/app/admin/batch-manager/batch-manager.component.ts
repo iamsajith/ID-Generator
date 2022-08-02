@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AdminService } from 'src/app/admin.service';
 
 @Component({
   selector: 'app-batch-manager',
@@ -6,11 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./batch-manager.component.css']
 })
 export class BatchManagerComponent implements OnInit {
-  studentData:any
+  id=""
+  newData:any
+  moderatorData:any
 
-  constructor() { }
+  constructor(private _actiroute:ActivatedRoute,private admin:AdminService ) { }
 
   ngOnInit(): void {
+
+    this.id = this._actiroute.snapshot.params['id'];
+    this.admin.fetchModerator(this.id).subscribe((data) => {
+      this.newData = JSON.parse(JSON.stringify(data))
+      console.log(this.newData)
+      this.admin.fetchModerator(this.newData).subscribe((moddata) => {
+        console.log(moddata)
+        this.moderatorData = JSON.parse(JSON.stringify(moddata))
+      })
+    })
+    
   }
 
 }

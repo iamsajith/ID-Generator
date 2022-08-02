@@ -31,9 +31,7 @@ export class ApplicationsComponent implements OnInit {
 
   accept(id:any) {
     this.moderator.accept(id).subscribe((data) => {
-      // AOS.init();
       console.log("Accepted")
-      // this.newData = this.newData.filter((p: any)=>p!=this.id)
     })
   }
 

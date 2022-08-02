@@ -469,6 +469,23 @@ app.post("/moderator/studentHistory", (req, res) => {
       res.send(data);
     });
 });
+// Fetch Moderators
+
+app.post("/moderator/fetchmoderator", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+  console.log(req.body.course);
+  data = req.body;
+  moderatorData
+    .find({}, { password: 0, pin: 0 })
+    .sort({ name: 1 })
+    .then((data) => {
+      console.log(data);
+      res.send(data);
+    });
+});
+
+
 
 // Add Moderator
 

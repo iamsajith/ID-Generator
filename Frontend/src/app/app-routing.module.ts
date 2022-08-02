@@ -20,12 +20,62 @@ import { StatusComponent } from './student/status/status.component';
 import { StudentHomeComponent } from './student/student-home/student-home.component';
 import { StudentComponent } from './student/student/student.component';
 
-const routes: Routes = [{ path: "", component: LoginComponent }, { path: "newpassword", component: ForgotComponent }, { path: "student/:id", canActivate: [AuthGuard], component: StudentComponent, children: [{ path: "", component: StudentHomeComponent }, { path: "apply", component: ApplyComponent }, { path: "status", component: StatusComponent }] }, {
-  path: "moderator/:id", canActivate: [AuthGuard], component: ModeratorHomeComponent, children: [{ path: "", component: ApplicationsComponent, children: [{ path: "", component: HeaderApplicationsComponent }] }, { path: "history", component: HistoryComponent, children: [{ path: "", component: HeaderHistoryComponent }] }]
-}, { path: "admin/:id",canActivate: [AuthGuard], component: AdminHomeComponent, children: [{ path: "", component: BatchManagerComponent,children:[{path:"",component:BmHeaderComponent}] }, { path: "newmanager", component: NewmanagerComponent,children:[{path:"",component:NmHeaderComponent}] }, { path: "formcontrol", component: FormControlComponent,children:[{path:"",component:FcHeaderComponent}] }] }];
+const routes: Routes = [
+  { path: '', component: LoginComponent },
+  { path: 'newpassword', component: ForgotComponent },
+  {
+    path: 'student/:id',
+    canActivate: [AuthGuard],
+    component: StudentComponent,
+    children: [
+      { path: '', component: StudentHomeComponent },
+      { path: 'apply', component: ApplyComponent },
+      { path: 'status', component: StatusComponent },
+    ],
+  },
+  {
+    path: 'moderator/:id',
+    canActivate: [AuthGuard],
+    component: ModeratorHomeComponent,
+    children: [
+      {
+        path: '',
+        component: ApplicationsComponent,
+        children: [{ path: '', component: HeaderApplicationsComponent }],
+      },
+      {
+        path: 'history',
+        component: HistoryComponent,
+        children: [{ path: '', component: HeaderHistoryComponent }],
+      },
+    ],
+  },
+  {
+    path: 'admin/:id',
+    canActivate: [AuthGuard],
+    component: AdminHomeComponent,
+    children: [
+      {
+        path: '',
+        component: BatchManagerComponent,
+        children: [{ path: '', component: BmHeaderComponent }],
+      },
+      {
+        path: 'newmanager',
+        component: NewmanagerComponent,
+        children: [{ path: '', component: NmHeaderComponent }],
+      },
+      {
+        path: 'formcontrol',
+        component: FormControlComponent,
+        children: [{ path: '', component: FcHeaderComponent }],
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
