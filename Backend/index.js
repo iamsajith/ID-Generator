@@ -57,7 +57,7 @@ const sendMail = async (step, email, password) => {
     } catch (error) {
       return error;
     }
-  } else {
+  } else if(step==1) {
     try {
       const accessToken = await oAuth2Client.getAccessToken;
       const transport = nodemailer.createTransport({
@@ -76,6 +76,32 @@ const sendMail = async (step, email, password) => {
         to: email,
         subject: "Updated Password",
         html: `<em>Hi👋, Your password has been successfully updated. Please use the below as your new password.<em style='text-align: center'><h2>${password}</h2>`,
+      };
+      const result = await transport.sendMail(mailOptions);
+      return result;
+    } catch (error) {
+      return error;
+    }
+  }
+  else {
+    try {
+      const accessToken = await oAuth2Client.getAccessToken;
+      const transport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          type: "OAuth2",
+          user: process.env.EMAIL,
+          clientId: CLIENT_ID,
+          clientSecret: CLIENT_SECRET,
+          refreshToken: REFRESH_TOKEN,
+          accessToken: accessToken,
+        },
+      });
+      const mailOptions = {
+        from: "ID Generator <process.env.EMAIL>",
+        to: email,
+        subject: "Welcome to ICTAK",
+        html: `<em>Hi👋,Your account has been created successfully<em><br><h4>Email : ${email}</h4> <h4>Password : ${password}</h4>`,
       };
       const result = await transport.sendMail(mailOptions);
       return result;
@@ -330,8 +356,6 @@ app.put("/admin/newpassword", (req, res) => {
 app.post("/student/register", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
-  // const today = new Date();
-  // date = today.getFullYear()+'-'+today.getMonth()+'-'+today.getDate()
   const d = new Date();
   dates =
     d.getFullYear() +
@@ -341,7 +365,6 @@ app.post("/student/register", (req, res) => {
     ("0" + d.getDate()).slice(-2);
 
   register = req.body.data;
-  // image =
 
   studentData
     .findOneAndUpdate(
@@ -445,6 +468,44 @@ app.post("/moderator/studentHistory", (req, res) => {
       console.log(data);
       res.send(data);
     });
+});
+
+// Add Moderator
+
+app.post("/moderator/new", (req, res) => {
+  moderatornew =
+    Math.random().toString(36).substring(2, 5) +
+    "mod" +
+    Math.random().toString(36).substring(2, 6);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+  var userCred = {
+    phone:req.body.phone,
+    course:req.body.course,
+    batch:req.body.batch,
+    joiningDate:req.body.join,
+    designation:req.body.designation,
+    email: req.body.email,
+    password: req.body.password,
+  };
+  var moderatordb = new moderatorData(userCred);
+  moderatorData.find({email:userCred.email}).then((data)=>{
+    console.log(data)
+    if(data.length == 0){
+      moderatordb.save().then((data) => {
+        const mail = req.body.email;
+        sendMail((step = 2), userCred.email, moderatornew)
+          .then((result) => console.log(result))
+          .catch((error) => {
+            console.log(error);
+          });
+      
+    });
+    }
+    res.send(data)
+  }
+  
+  )
 });
 
 

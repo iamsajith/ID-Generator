@@ -33,6 +33,7 @@ const moderatorSchema = new schema({
  course:String,
  batch:String,
  joiningDate:String,
+ designation:String,
  pin: Number,
 }, {
  versionKey: false
