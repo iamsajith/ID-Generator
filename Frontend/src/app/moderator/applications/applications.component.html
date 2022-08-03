@@ -2,6 +2,7 @@
   <router-outlet></router-outlet>
   <div class="card-body">
     <div class="table-responsive">
+      <div data-aos="fade-right">
       <table class="table">
         <thead class="thead-light">
           <tr class="align-middle">
@@ -13,6 +14,7 @@
             <th>VALID UPTO</th>
           </tr>
         </thead>
+       
         <tbody>
           <tr class="align-middle" *ngFor="let i of studentData">
             <td>
@@ -40,8 +42,11 @@
               </button>
             </td>
           </tr>
+
         </tbody>
+      
       </table>
+    </div>
     </div>
   </div>
 </div>

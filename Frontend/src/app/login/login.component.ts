@@ -43,18 +43,30 @@ export class LoginComponent implements OnInit {
       });
     } else if (x === 'mod') {
       this._auth.moderatorcheck(this.User).subscribe((data) => {
+        if(data != null){
+        this.toastr.success("Success")
         const info = JSON.parse(JSON.stringify(data));
         console.log(info);
         localStorage.setItem('token', info.token);
         localStorage.setItem('url', `/moderator/${info.data}/`);
         this._router.navigate(['/moderator/', info.data]);
+        }
+        else{
+          this.toastr.error("Error Occured")
+        }
       });
     } else if (x === 'adm') {
       this._auth.admincheck(this.User).subscribe((data) => {
+        if(data != null){
+          this.toastr.success("Success")
         const info = JSON.parse(JSON.stringify(data));
         localStorage.setItem('token', info.token);
         localStorage.setItem('url', `/admin/${info.data}/`);
         this._router.navigate(['/admin/', info.data]);
+        }
+        else{
+          this.toastr.error("Error Occured")
+        }
       });
     } else {
      

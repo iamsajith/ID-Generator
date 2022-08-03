@@ -525,6 +525,15 @@ app.post("/moderator/new", (req, res) => {
   )
 });
 
+// Delete Moderator
+
+app.delete("/admin/moderator/:id",(req,res)=>{
+  moderatorData.findByIdAndDelete(req.params.id).then((data)=>{
+    res.send(data)
+  })
+})
+
+
 
 app.get("/courses",(req,res)=>{
   courseData.find().then((data)=>{

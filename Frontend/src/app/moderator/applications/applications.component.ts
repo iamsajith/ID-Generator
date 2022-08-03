@@ -16,6 +16,7 @@ export class ApplicationsComponent implements OnInit {
   constructor(private moderator: ModeratorService, private _actiroute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    AOS.init();
     this.id = this._actiroute.snapshot.params['id'];
     localStorage.setItem("id", this.id)
     this.moderator.studentData(this.id).subscribe((data) => {
@@ -32,12 +33,14 @@ export class ApplicationsComponent implements OnInit {
   accept(id:any) {
     this.moderator.accept(id).subscribe((data) => {
       console.log("Accepted")
+      window.location.reload()
     })
   }
 
   reject(id: any) {
     this.moderator.reject(id).subscribe(() => {
       console.log("Rejected")
+      window.location.reload()
   })
 }
 

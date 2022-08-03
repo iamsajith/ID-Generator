@@ -12,4 +12,13 @@ export class AdminService {
 
   }
 
+  updateMod(id:any){
+    
+
+  }
+
+  deleteMod(id:any){
+return this.http.delete(`http://localhost:8080/admin/moderator/`+id)
+  }
+
 }

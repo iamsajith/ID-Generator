@@ -27,5 +27,18 @@ export class BatchManagerComponent implements OnInit {
     })
     
   }
+  update(id:any){
+    localStorage.setItem("BM-ID",id)
+  }
+
+  delete(id:any){
+    console.log(id)
+    this.admin.deleteMod(id).subscribe(()=>{
+      console.log("DELETED")
+    })
+    window.location.reload()
+
+  }
+
 
 }

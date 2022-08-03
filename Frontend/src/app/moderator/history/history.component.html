@@ -5,6 +5,7 @@
       <div class="exceldownload">
         <button class="btn btn-outline-dark my-4" (click)="exportexcel()"><i class="fa-solid fa-download"></i><small class="px-2">EXPORT</small></button>
       </div>
+      <div data-aos="fade-right">
       <table class="table" id="excel-table">
         <thead class="thead-light">
           <tr class="align-middle">
@@ -17,7 +18,9 @@
             <th>STATUS</th>
           </tr>
         </thead>
+        
         <tbody>
+          
           <tr class="align-middle" *ngFor="let i of studentData" >
             <td>
               <img
@@ -32,8 +35,11 @@
             <td>{{i.endDate}}</td>
             <td><span class="px-2">{{i.status}}</span></td>
           </tr>
+        
         </tbody>
+      
       </table>
+    </div>
     </div>
   </div>
  </div>

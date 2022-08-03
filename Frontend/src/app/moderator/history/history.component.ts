@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModeratorService } from 'src/app/moderator.service';
 import * as XLSX from 'xlsx';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-history',
@@ -16,7 +17,7 @@ export class HistoryComponent implements OnInit {
   constructor(private moderator:ModeratorService) { }
 
   ngOnInit(): void {
-    
+    AOS.init();
     this.moderator.studentData(localStorage.getItem("id")).subscribe((data) => {
       this.newData = JSON.parse(JSON.stringify(data))
       console.log(this.newData)
