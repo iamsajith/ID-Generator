@@ -474,8 +474,6 @@ app.post("/moderator/studentHistory", (req, res) => {
 app.post("/moderator/fetchmoderator", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
-  console.log(req.body.course);
-  data = req.body;
   moderatorData
     .find({}, { password: 0, pin: 0 })
     .sort({ name: 1 })
@@ -528,6 +526,7 @@ app.post("/moderator/new", (req, res) => {
 // Delete Moderator
 
 app.delete("/admin/moderator/:id",(req,res)=>{
+  console.log(req.params.id)
   moderatorData.findByIdAndDelete(req.params.id).then((data)=>{
     res.send(data)
   })
@@ -537,6 +536,13 @@ app.delete("/admin/moderator/:id",(req,res)=>{
 
 app.get("/courses",(req,res)=>{
   courseData.find().then((data)=>{
+    console.log(data)
+    res.send(data)
+  })
+})
+
+app.get("/admin/moderator/view/:id",(req,res)=>{
+  moderatorData.findById(req.params.id).then((data)=>{
     console.log(data)
     res.send(data)
   })

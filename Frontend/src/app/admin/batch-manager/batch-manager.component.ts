@@ -9,21 +9,25 @@ import { AdminService } from 'src/app/admin.service';
 })
 export class BatchManagerComponent implements OnInit {
   id=""
-  newData:any
-  moderatorData:any
+  // displayStyle = "none";
+  moderatorData:any=[]
+  viewData:any
 
   constructor(private _actiroute:ActivatedRoute,private admin:AdminService ) { }
+  
 
   ngOnInit(): void {
 
     this.id = this._actiroute.snapshot.params['id'];
-    this.admin.fetchModerator(this.id).subscribe((data) => {
-      this.newData = JSON.parse(JSON.stringify(data))
-      console.log(this.newData)
-      this.admin.fetchModerator(this.newData).subscribe((moddata) => {
-        console.log(moddata)
-        this.moderatorData = JSON.parse(JSON.stringify(moddata))
-      })
+    console.log("eyeD",this.id)
+    this.admin.fetchModerator(this.id).subscribe((moddata) => {
+      this.moderatorData = JSON.parse(JSON.stringify(moddata))
+      console.log(this.moderatorData[1].name)
+      // console.log(this.newData)
+      // this.admin.fetchModerator(this.newData).subscribe((moddata) => {
+      //   console.log(moddata)
+      //   
+      // })
     })
     
   }
@@ -38,6 +42,17 @@ export class BatchManagerComponent implements OnInit {
     })
     window.location.reload()
 
+  }
+  view(id:any){
+    // this.displayStyle = "block";
+    this.admin.viewpopup(id).subscribe((data)=>{
+      console.log(data)
+      this.viewData = JSON.parse(JSON.stringify(data))
+    })
+
+  }
+  closeview(){
+    // this.displayStyle = "none";
   }
 
 

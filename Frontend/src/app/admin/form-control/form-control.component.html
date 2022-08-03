@@ -1,45 +1,197 @@
 <div class="card mx-5">
  <router-outlet></router-outlet>
  <div class="card-body">
-   <div class="table-responsive">
-     <table class="table">
-       <thead class="thead-light">
-         <tr class="align-middle">
-           <th></th>
-           <th>Name</th>
-           <th>Contact</th>
-           <th>Batch</th>
-           <th>Applied On</th>
-           <th>Valid Upto</th>
-         </tr>
-       </thead>
-       <tbody>
-         <tr class="align-middle" *ngFor="let i of studentData">
-           <td>
-             <img [src]="i.image" alt="image" />
-           </td>
-           <td>{{ i.name }}</td>
-           <td>{{ i.phone }}<br />{{ i.email }}</td>
-           <td>{{ i.batch }}</td>
-           <td>{{ i.Date }}</td>
-           <td>{{ i.endDate }}</td>
-           <td>
-             <button
-               class="button btn btn-rounded-circle btn-outline-success"
-             >
-               <i class="fa-solid fa-check"></i>
-             </button>
-           </td>
-           <td>
-             <button
-               class="button btn btn-rounded-circle btn-outline-danger"
-             >
-               <i class="fa-solid fa-xmark"></i>
-             </button>
-           </td>
-         </tr>
-       </tbody>
-     </table>
-   </div>
+  <div class="container text-center">
+    <button
+  style="margin: 50px; padding: 10px"
+  type="button"
+  class="btn btn-primary"
+  (click)="openPopup()">NEW MANAGER
+  </button>
+  <button
+  style="margin: 50px; padding: 10px"
+  type="button"
+  class="btn btn-primary"
+  (click)="openPopup1()">ADD COURSE / BATCH
+  </button>
+  <button
+  style="margin: 50px; padding: 10px"
+  type="button"
+  class="btn btn-primary"
+  (click)="openPopup2()">DELETE COURSE / BATCH
+  </button>
+
+</div>
+  <div
+  
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content wrapper">
+    <div class="modal-header">
+      <div class="text-center mt-2 mb-3 name">NEW BATCH MANAGER</div>
+    </div>
+    <div class="modal-body">
+      
+      <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Save()">
+        <div class="form-field d-flex align-items-center px-3">
+          <i class="fa-solid fa-arrow-pointer"></i>
+          <label for="" [class.d-none]="type.valid">Type</label>
+          <select  type="text"
+          name="type"
+          id="type"
+          
+          [(ngModel)]="data.type"
+          #type="ngModel"
+          [class.is-invalid]="type.invalid && type.touched"
+          required 
+          >
+        <option *ngFor="let type of Types" [value]="type" >{{type}}</option>
+        </select>
+        </div>
+         <div class="form-field d-flex align-items-center px-3" [class.d-none]="type.invalid" >
+          <i class="fa-solid fa-book"></i>
+           <input
+             type="text"
+             name="text"
+             id="add"
+             placeholder="Enter Name"
+             [(ngModel)]="data.add"
+             #add="ngModel"
+             [class.is-invalid]="add.invalid && add.touched"
+             required
+           />
+         </div>
+         <button type="submit" class="btn mt-3 mb-1" [disabled]="userlogin.form.invalid">
+           SAVE
+         </button>
+       </form>
+  
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="button"
+          (click)="closePopup()">
+          <i class="fas fa-window-close"></i>
+      </button>
+    </div>
+    </div>
+  </div>
+  </div>
+  <div
+  
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle1}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content wrapper">
+    <div class="modal-header">
+      <div class="text-center mt-2 mb-3 name">ADD</div>
+    </div>
+    <div class="modal-body">
+      
+      <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Save1()">
+        <div class="form-field d-flex align-items-center px-3">
+          <i class="fa-solid fa-arrow-pointer"></i>
+          <label for="" [class.d-none]="type.valid">Type</label>
+          <select  type="text"
+          name="type"
+          id="type"
+          
+          [(ngModel)]="data.type"
+          #type="ngModel"
+          [class.is-invalid]="type.invalid && type.touched"
+          required 
+          >
+        <option *ngFor="let type of Types" [value]="type" >{{type}}</option>
+        </select>
+        </div>
+         <div class="form-field d-flex align-items-center px-3" [class.d-none]="type.invalid" >
+          <i class="fa-solid fa-book"></i>
+           <input
+             type="text"
+             name="text"
+             id="add"
+             placeholder="Enter Name"
+             [(ngModel)]="data.add"
+             #add="ngModel"
+             [class.is-invalid]="add.invalid && add.touched"
+             required
+           />
+         </div>
+         <button type="submit" class="btn mt-3 mb-1" [disabled]="userlogin.form.invalid">
+           SAVE
+         </button>
+       </form>
+  
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="button"
+          (click)="closePopup1()">
+          <i class="fas fa-window-close"></i>
+      </button>
+    </div>
+    </div>
+  </div>
+  </div>
+  <div
+  
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle2}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content wrapper">
+    <div class="modal-header">
+      <div class="text-center  name">DELETE</div>
+    </div>
+    <div class="modal-body">
+      
+      <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Save()">
+        <div class="form-field d-flex align-items-center px-3">
+          <i class="fa-solid fa-arrow-pointer"></i>
+          <label for="" [class.d-none]="type.valid">Type</label>
+          <select  type="text"
+          name="type"
+          id="type"
+          
+          [(ngModel)]="data.type"
+          #type="ngModel"
+          [class.is-invalid]="type.invalid && type.touched"
+          required 
+          >
+        <option *ngFor="let type of Types" [value]="type" >{{type}}</option>
+        </select>
+        </div>
+         <div class="form-field d-flex align-items-center px-3" [class.d-none]="type.invalid" >
+          <i class="fa-solid fa-book"></i>
+           <input
+             type="text"
+             name="text"
+             id="add"
+             placeholder="Enter Name"
+             [(ngModel)]="data.add"
+             #add="ngModel"
+             [class.is-invalid]="add.invalid && add.touched"
+             required
+           />
+         </div>
+         <button type="submit" class="btn mt-3 mb-1" [disabled]="userlogin.form.invalid">
+           SAVE
+         </button>
+       </form>
+  
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="button"
+          (click)="closePopup2()">
+          <i class="fas fa-window-close"></i>
+      </button>
+    </div>
+    </div>
+  </div>
+  </div>
  </div>
 </div>

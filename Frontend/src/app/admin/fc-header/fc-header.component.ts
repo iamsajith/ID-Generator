@@ -12,11 +12,11 @@ export class FcHeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  newmanagers(){
-    let url = localStorage.getItem("url")
-this._router.navigate([`${url}/newmanager`])
+//   newmanagers(){
+//     let url = localStorage.getItem("url")
+// this._router.navigate([`${url}/newmanager`])
 
-  }
+//   }
   
   formcontrols(){
     let url = localStorage.getItem("url")

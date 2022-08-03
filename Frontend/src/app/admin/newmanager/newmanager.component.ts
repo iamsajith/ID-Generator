@@ -8,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class NewmanagerComponent implements OnInit {
   studentData:any
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

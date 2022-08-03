@@ -9,23 +9,54 @@
            <th>CONTACT</th>
            <th>DESIGNATION</th>
            <th>COURSE</th>
-           <th>BATCH</th>
+           <!-- <th>BATCH</th> -->
+           <th></th>
            <th></th>
            <th></th>
          </tr>
        </thead>
        <tbody>
+        
          <tr class="align-middle" *ngFor="let i of moderatorData">
            <td>{{ i.name }}</td>
            <td>{{ i.phone }}<br />{{ i.email }}</td>
            <td>{{ i.designation }}</td>
            <td>{{ i.course }}</td>
-           <td>{{i.batch}}</td>
+           <td><button class="btn btn-outline-info " data-bs-toggle="modal" data-bs-target="#myModal" (click)="view(i._id)" ><i class="fa-solid fa-eye"></i></button></td>
            <td><button class="btn btn-outline-warning"(click)="update(i._id)"><i class="fa-solid fa-pen-to-square"></i></button></td>
            <td><button class="btn btn-outline-danger"(click)="delete(i._id)"><i class="fa-solid fa-trash-can"></i></button></td>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">{{i.name}}</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
          </tr>
        </tbody>
      </table>
    </div>
  </div>
 </div>
+
+
+
+
