@@ -5,8 +5,8 @@ import { BatchManagerComponent } from './admin/batch-manager/batch-manager.compo
 import { BmHeaderComponent } from './admin/bm-header/bm-header.component';
 import { FcHeaderComponent } from './admin/fc-header/fc-header.component';
 import { FormControlComponent } from './admin/form-control/form-control.component';
-// import { NewmanagerComponent } from './admin/newmanager/newmanager.component';
-// import { NmHeaderComponent } from './admin/nm-header/nm-header.component';
+import { NewmanagerComponent } from './admin/newmanager/newmanager.component';
+import { NmHeaderComponent } from './admin/nm-header/nm-header.component';
 import { AuthGuard } from './auth.guard';
 import { ForgotComponent } from './forgot/forgot.component';
 import { LoginComponent } from './login/login.component';
@@ -60,11 +60,11 @@ const routes: Routes = [
         component: BatchManagerComponent,
         children: [{ path: '', component: BmHeaderComponent }],
       },
-      // {
-      //   path: 'newmanager',
-      //   component: NewmanagerComponent,
-      //   children: [{ path: '', component: NmHeaderComponent }],
-      // },
+      {
+        path: 'editmanager',
+        component: NewmanagerComponent,
+        children: [{ path: '', component: NmHeaderComponent }],
+      },
       {
         path: 'formcontrol',
         component: FormControlComponent,

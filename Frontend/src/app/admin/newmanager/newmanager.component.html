@@ -1,45 +1,171 @@
-<!-- <div class="card mx-5">
- <router-outlet></router-outlet>
- <div class="card-body">
-   <div class="table-responsive">
-     <table class="table">
-       <thead class="thead-light">
-         <tr class="align-middle">
-           <th></th>
-           <th>Name</th>
-           <th>Contact</th>
-           <th>Batch</th>
-           <th>Applied On</th>
-           <th>Valid Upto</th>
-         </tr>
-       </thead>
-       <tbody>
-         <tr class="align-middle" *ngFor="let i of studentData">
-           <td>
-             <img [src]="i.image" alt="image" />
-           </td>
-           <td>{{ i.name }}</td>
-           <td>{{ i.phone }}<br />{{ i.email }}</td>
-           <td>{{ i.batch }}</td>
-           <td>{{ i.Date }}</td>
-           <td>{{ i.endDate }}</td>
-           <td>
-             <button
-               class="button btn btn-rounded-circle btn-outline-success"
-             >
-               <i class="fa-solid fa-check"></i>
-             </button>
-           </td>
-           <td>
-             <button
-               class="button btn btn-rounded-circle btn-outline-danger"
-             >
-               <i class="fa-solid fa-xmark"></i>
-             </button>
-           </td>
-         </tr>
-       </tbody>
-     </table>
-   </div>
- </div>
-</div> -->
+
+<div class="card mx-5">
+  <router-outlet></router-outlet>
+  <div class="card-body">
+    <div class="text-center">
+<div data-aos="zoom-out-up">
+  <div class="wrapper">
+   <div class="text-center mt-2 mb-2  name">EDIT </div>
+  
+   <form #userreg="ngForm" (ngSubmit)="Update()">
+    <div class="col-sm mx-1">
+      <div class="form-field d-flex align-items-center">
+        <i class="fa-solid fa-user"></i>
+        <input
+          type="text"
+          name="name"
+          id="Name"
+          placeholder="Name"
+          [(ngModel)]="data.name"
+          #name="ngModel"
+          [class.is-invalid]="name.invalid && name.touched"
+          required
+        />
+        <small
+          [class.d-none]="name.valid"
+          class="px-3 text-danger"
+          >χ</small
+        >
+        <small
+          [class.d-none]="name.invalid"
+          class="px-3 text-success"
+          >✓</small
+        >
+      </div>
+      <div class="form-field d-flex align-items-center">
+        <i class="fa-solid fa-envelope"></i>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email"
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          [(ngModel)]="data.email"
+          #email="ngModel"
+          [class.is-invalid]="
+            email.invalid && email.touched
+          "
+          required
+        />
+        <small
+          [class.d-none]="email.valid"
+          class="px-3 text-danger"
+          >χ</small
+        >
+        <small
+          [class.d-none]="email.invalid"
+          class="px-3 text-success"
+          >✓</small
+        >
+      </div>
+      <div class="form-field d-flex align-items-center">
+        <i class="fa-solid fa-phone"></i>
+        <input
+          type="text"
+          name="phone"
+          id="phone"
+          minlength="10"
+          maxlength="10"
+          placeholder="Phone Number"
+          [(ngModel)]="data.phone"
+          #phone="ngModel"
+          [class.is-invalid]="
+            phone.invalid && phone.touched
+          "
+          required
+        />
+        <small
+          [class.d-none]="phone.valid"
+          class="px-3 text-danger"
+          >χ</small
+        >
+        <small
+          [class.d-none]="phone.invalid"
+          class="px-3 text-success"
+          >✓</small
+        >
+      </div>
+    </div>
+    <div class="col-sm mx-1">
+      <div class="form-field d-flex align-items-center">
+        <i class="fa-solid fa-book"></i>
+        <label for="" [class.d-none]="course.valid"
+          >Course</label
+        >
+        <select
+          type="text"
+          name="course"
+          id="course"
+          [(ngModel)]="data.course"
+          #course="ngModel"
+          [class.is-invalid]="
+            course.invalid && course.touched
+          "
+          required
+        >
+          <option
+            *ngFor="let course of courses"
+            [value]="course"
+          >
+            {{ course }}
+          </option>
+        </select>
+
+        <small
+          [class.d-none]="course.valid"
+          class="px-3 text-danger"
+          >χ</small
+        >
+        <small
+          [class.d-none]="course.invalid"
+          class="px-3 text-success"
+          >✓</small
+        >
+      </div>
+      <div class="form-field d-flex align-items-center">
+        <i class="fa-solid fa-user-tie"></i>
+        <label for="" [class.d-none]="designation.valid"
+          >Course</label
+        >
+        <select
+          type="text"
+          name="designation"
+          id="designation"
+          [(ngModel)]="data.designation"
+          #designation="ngModel"
+          [class.is-invalid]="
+            designation.invalid && designation.touched
+          "
+          required
+        >
+          <option
+            *ngFor="let designation of designations"
+            [value]="designation"
+          >
+            {{ designation }}
+          </option>
+        </select>
+
+        <small
+          [class.d-none]="designation.valid"
+          class="px-3 text-danger"
+          >χ</small
+        >
+        <small
+          [class.d-none]="designation.invalid"
+          class="px-3 text-success"
+          >✓</small
+        >
+      </div>
+    </div>
+    <button
+      class="btn mt-3 mb-1"
+      [disabled]="userreg.form.invalid"
+    >
+      SAVE
+    </button>
+  </form>
+  </div>
+</div>
+</div>
+</div>

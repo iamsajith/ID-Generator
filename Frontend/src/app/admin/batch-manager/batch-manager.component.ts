@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/admin.service';
+import { StudentService } from 'src/app/student.service';
+import { ModeratorModel } from 'src/app/Model/moderator.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-batch-manager',
@@ -9,50 +12,62 @@ import { AdminService } from 'src/app/admin.service';
 })
 export class BatchManagerComponent implements OnInit {
   id=""
-  // displayStyle = "none";
-  moderatorData:any=[]
-  viewData:any
-
-  constructor(private _actiroute:ActivatedRoute,private admin:AdminService ) { }
+  new:any
+  displayStyle = "none";
+  moderatorData:ModeratorModel[] | any
+  data:any= new ModeratorModel("","","","","") 
+  array:any
+  courses:any
+  designations=["Manager","Assistant Manager","Course Manager"]
+  constructor(private _actiroute:ActivatedRoute,private admin:AdminService,private _student:StudentService, private toastr: ToastrService , private router:Router) { }
   
 
   ngOnInit(): void {
 
     this.id = this._actiroute.snapshot.params['id'];
-    console.log("eyeD",this.id)
     this.admin.fetchModerator(this.id).subscribe((moddata) => {
       this.moderatorData = JSON.parse(JSON.stringify(moddata))
-      console.log(this.moderatorData[1].name)
-      // console.log(this.newData)
-      // this.admin.fetchModerator(this.newData).subscribe((moddata) => {
-      //   console.log(moddata)
-      //   
-      // })
     })
     
   }
   update(id:any){
     localStorage.setItem("BM-ID",id)
+    let url = localStorage.getItem("url")
+    this.router.navigate([`${url}/editmanager`])
   }
 
   delete(id:any){
     console.log(id)
     this.admin.deleteMod(id).subscribe(()=>{
-      console.log("DELETED")
+    console.log("DELETED")
     })
     window.location.reload()
 
   }
-  view(id:any){
-    // this.displayStyle = "block";
-    this.admin.viewpopup(id).subscribe((data)=>{
-      console.log(data)
-      this.viewData = JSON.parse(JSON.stringify(data))
+  view(){
+    this.displayStyle = "block";
+    this._student.getCourses().subscribe((data)=>{
+    this.array = JSON.parse(JSON.stringify(data))
+    this.courses = this.array[0].course
     })
 
   }
   closeview(){
-    // this.displayStyle = "none";
+    this.displayStyle = "none";
+  }
+
+  Register(){
+    this.admin.addmanager(this.data).subscribe((data)=>{
+      this.new = JSON.parse(JSON.stringify(data))
+      if(this.new.length == 0){
+        window.location.reload()
+        this.toastr.success("Added")
+      }
+      else{
+        this.toastr.error("Failed")
+      }
+    })
+
   }
 
 

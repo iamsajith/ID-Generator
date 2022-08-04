@@ -27,11 +27,11 @@ const studentSchema = new schema({
 })
 
 const moderatorSchema = new schema({
+ name:String,
  email: String,
  phone:String,
  password: String,
  course:String,
- batch:String,
  joiningDate:String,
  designation:String,
  pin: Number,

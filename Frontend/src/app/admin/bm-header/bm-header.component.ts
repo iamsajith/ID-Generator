@@ -12,9 +12,9 @@ export class BmHeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-//   newmanagers(){
+//   editmanagers(){
 //     let url = localStorage.getItem("url")
-// this._router.navigate([`${url}/newmanager`])
+// this._router.navigate([`${url}/editmanager`])
 
 //   }
   

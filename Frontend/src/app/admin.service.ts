@@ -21,8 +21,16 @@ export class AdminService {
   deleteMod(id:any){
 return this.http.delete(`http://localhost:8080/admin/moderator/`+id)
   }
-  viewpopup(id:any){
-    return this.http.get(`http://localhost:8080/admin/moderator/view/`+id)
+  addmanager(data:any){
+    console.log(data)
+    return this.http.post(`http://localhost:8080/admin/moderator/add/`,data)
+  }
+
+  updatefetch(id:any){
+    return this.http.get(`http://localhost:8080/data/`+id)
+  }
+  update(data:any){
+    return this.http.put("http://localhost:8080/update",data)
   }
 
 }

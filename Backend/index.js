@@ -487,40 +487,58 @@ app.post("/moderator/fetchmoderator", (req, res) => {
 
 // Add Moderator
 
-app.post("/moderator/new", (req, res) => {
-  moderatornew =
-    Math.random().toString(36).substring(2, 5) +
-    "mod" +
-    Math.random().toString(36).substring(2, 6);
+app.post("/admin/moderator/add", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
-  var userCred = {
-    phone:req.body.phone,
-    course:req.body.course,
-    batch:req.body.batch,
-    joiningDate:req.body.join,
-    designation:req.body.designation,
-    email: req.body.email,
-    password: req.body.password,
-  };
-  var moderatordb = new moderatorData(userCred);
-  moderatorData.find({email:userCred.email}).then((data)=>{
+  moderatorData.findById(req.body._id).then((data)=>{
     console.log(data)
-    if(data.length == 0){
-      moderatordb.save().then((data) => {
-        const mail = req.body.email;
-        sendMail((step = 2), userCred.email, moderatornew)
-          .then((result) => console.log(result))
-          .catch((error) => {
-            console.log(error);
-          });
+    if (data===null){
+      const d = new Date();
+      dates =
+        d.getFullYear() +
+        "-" +
+        ("0" + (d.getMonth() + 1)).slice(-2) +
+        "-" +
+        ("0" + d.getDate()).slice(-2);
+      moderatornew =
+        Math.random().toString(36).substring(2, 5) +
+        "mod" +
+        Math.random().toString(36).substring(2, 6);
+    
+      var userCred = {
+        name:req.body.name,
+        phone:req.body.phone,
+        course:req.body.course,
+        joiningDate:dates,
+        designation:req.body.designation,
+        email: req.body.email,
+        password: moderatornew,
+      };
+      var moderatordb = new moderatorData(userCred);
+      moderatorData.find({email:userCred.email}).then((data)=>{
+        console.log(data)
+        if(data.length == 0){
+          moderatordb.save().then((data) => {
+            const mail = req.body.email;
+            sendMail((step = 2), userCred.email, moderatornew)
+              .then((result) => console.log(result))
+              .catch((error) => {
+                console.log(error);
+              });
+          
+        });
+        }
+        res.send(data)
+      }
       
-    });
+      )
+
     }
+    else{
     res.send(data)
-  }
-  
-  )
+    }
+  })
+ 
 });
 
 // Delete Moderator
@@ -531,18 +549,43 @@ app.delete("/admin/moderator/:id",(req,res)=>{
     res.send(data)
   })
 })
+// Update
+app.put("/update", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+  moderatorData.findByIdAndUpdate(
+    req.body._id,
+    {
+      $set: {
+        name:req.body.name,
+        phone:req.body.phone,
+        course:req.body.course,
+        designation:req.body.designation,
+        email: req.body.email,
+      },
+    },
+    (err, Data) => {
+      if (err) {
+        res.send("Error While Updating");
+      } else {
+        res.send(Data);
+      }
+    }
+  );
+});
+
+app.get('/data/:id',(req,res)=>{
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+  moderatorData.findByIdAndUpdate(req.params.id).then((data)=>{
+    res.send(data)
+  })
+})
 
 
 
 app.get("/courses",(req,res)=>{
   courseData.find().then((data)=>{
-    console.log(data)
-    res.send(data)
-  })
-})
-
-app.get("/admin/moderator/view/:id",(req,res)=>{
-  moderatorData.findById(req.params.id).then((data)=>{
     console.log(data)
     res.send(data)
   })
