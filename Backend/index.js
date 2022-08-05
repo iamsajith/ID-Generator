@@ -591,6 +591,47 @@ app.get("/courses",(req,res)=>{
   })
 })
 
+// Course Action
+app.post("/courseaction", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+  newarray = req.body
+  courseData
+    .findOneAndUpdate(
+      {},
+      {
+        $set: {
+          course: newarray,
+        },
+      }
+    )
+    .then((data) => {
+      console.log(data);
+      res.send(data);
+    });
+});
+
+// Batch Action
+
+app.post("/batchaction", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
+  newarray = req.body
+  courseData
+    .findOneAndUpdate(
+      {},
+      {
+        $set: {
+          batch: newarray,
+        },
+      }
+    )
+    .then((data) => {
+      console.log(data);
+      res.send(data);
+    });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

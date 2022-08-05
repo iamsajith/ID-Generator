@@ -2,12 +2,6 @@
  <router-outlet></router-outlet>
  <div class="card-body">
   <div class="container text-center">
-    <button
-  style="margin: 50px; padding: 10px"
-  type="button"
-  class="btn btn-primary"
-  (click)="openPopup()">NEW MANAGER
-  </button>
   <button
   style="margin: 50px; padding: 10px"
   type="button"
@@ -20,65 +14,7 @@
   class="btn btn-primary"
   (click)="openPopup2()">DELETE COURSE / BATCH
   </button>
-
 </div>
-  <div
-  
-  class="modal"
-  tabindex="-1"
-  role="dialog"
-  [ngStyle]="{'display':displayStyle}">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content wrapper">
-    <div class="modal-header">
-      <div class="text-center mt-2 mb-3 name">NEW BATCH MANAGER</div>
-    </div>
-    <div class="modal-body">
-      
-      <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Save()">
-        <div class="form-field d-flex align-items-center px-3">
-          <i class="fa-solid fa-arrow-pointer"></i>
-          <label for="" [class.d-none]="type.valid">Type</label>
-          <select  type="text"
-          name="type"
-          id="type"
-          
-          [(ngModel)]="data.type"
-          #type="ngModel"
-          [class.is-invalid]="type.invalid && type.touched"
-          required 
-          >
-        <option *ngFor="let type of Types" [value]="type" >{{type}}</option>
-        </select>
-        </div>
-         <div class="form-field d-flex align-items-center px-3" [class.d-none]="type.invalid" >
-          <i class="fa-solid fa-book"></i>
-           <input
-             type="text"
-             name="text"
-             id="add"
-             placeholder="Enter Name"
-             [(ngModel)]="data.add"
-             #add="ngModel"
-             [class.is-invalid]="add.invalid && add.touched"
-             required
-           />
-         </div>
-         <button type="submit" class="btn mt-3 mb-1" [disabled]="userlogin.form.invalid">
-           SAVE
-         </button>
-       </form>
-  
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="button"
-          (click)="closePopup()">
-          <i class="fas fa-window-close"></i>
-      </button>
-    </div>
-    </div>
-  </div>
-  </div>
   <div
   
   class="modal"
@@ -92,7 +28,7 @@
     </div>
     <div class="modal-body">
       
-      <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Save1()">
+      <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="save()">
         <div class="form-field d-flex align-items-center px-3">
           <i class="fa-solid fa-arrow-pointer"></i>
           <label for="" [class.d-none]="type.valid">Type</label>
@@ -149,7 +85,7 @@
     </div>
     <div class="modal-body">
       
-      <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="Save()">
+      <form class="p-1 mt-2" #userlogin="ngForm" (ngSubmit)="delete()">
         <div class="form-field d-flex align-items-center px-3">
           <i class="fa-solid fa-arrow-pointer"></i>
           <label for="" [class.d-none]="type.valid">Type</label>
@@ -158,6 +94,7 @@
           id="type"
           
           [(ngModel)]="data.type"
+          (ngModelChange)="valuechange($event)"
           #type="ngModel"
           [class.is-invalid]="type.invalid && type.touched"
           required 
@@ -167,19 +104,19 @@
         </div>
          <div class="form-field d-flex align-items-center px-3" [class.d-none]="type.invalid" >
           <i class="fa-solid fa-book"></i>
-           <input
-             type="text"
-             name="text"
-             id="add"
-             placeholder="Enter Name"
-             [(ngModel)]="data.add"
-             #add="ngModel"
-             [class.is-invalid]="add.invalid && add.touched"
-             required
-           />
+          <select  type="text"
+          name="remove"
+          id="remove"
+          [(ngModel)]="data.add"
+          #remove="ngModel"
+          [class.is-invalid]="remove.invalid && remove.touched"
+          required 
+          >
+        <option *ngFor="let i of select" [value]="i" >{{i}}</option>
+        </select>
          </div>
          <button type="submit" class="btn mt-3 mb-1" [disabled]="userlogin.form.invalid">
-           SAVE
+           DELETE
          </button>
        </form>
   

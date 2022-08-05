@@ -8,7 +8,6 @@ export class AdminService {
 
   constructor(private http:HttpClient) { }
   fetchModerator(data:any){
-    console.log("hello")
     return this.http.post('http://localhost:8080/moderator/fetchmoderator',data)
 
   }
@@ -31,6 +30,16 @@ return this.http.delete(`http://localhost:8080/admin/moderator/`+id)
   }
   update(data:any){
     return this.http.put("http://localhost:8080/update",data)
+  }
+
+
+  Course(data:any){
+    console.log(data)
+    return this.http.post("http://localhost:8080/courseaction",data)
+  }
+  Batch(data:any){
+    console.log(data)
+    return this.http.post("http://localhost:8080/batchaction",data)
   }
 
 }
