@@ -19,6 +19,7 @@ export class BatchManagerComponent implements OnInit {
   array:any
   courses:any
   designations=["Manager","Assistant Manager","Course Manager"]
+  p : number = 1;
   constructor(private _actiroute:ActivatedRoute,private admin:AdminService,private _student:StudentService, private toastr: ToastrService , private router:Router) { }
   
 
