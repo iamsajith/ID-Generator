@@ -20,7 +20,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="align-middle" *ngFor="let i of moderatorData">
+          <tr class="align-middle" *ngFor="let i of moderatorData | paginate: {itemsPerPage: 5, currentPage: p};">
             <td>{{ i.name }}</td>
             <td>{{ i.phone }}<br/>{{ i.email }}</td>
             <td>{{ i.designation }}</td>
