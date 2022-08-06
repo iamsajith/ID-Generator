@@ -31,6 +31,8 @@ import { FcHeaderComponent } from './admin/fc-header/fc-header.component';
 import { NmHeaderComponent } from './admin/nm-header/nm-header.component';
 import { BmHeaderComponent } from './admin/bm-header/bm-header.component';
 import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
