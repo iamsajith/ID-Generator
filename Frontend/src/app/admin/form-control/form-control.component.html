@@ -2,18 +2,22 @@
  <router-outlet></router-outlet>
  <div class="card-body">
   <div class="container text-center">
+    <div data-aos="fade-down-right">
   <button
   style="margin: 50px; padding: 10px"
   type="button"
-  class="btn btn-primary"
-  (click)="openPopup1()">ADD COURSE / BATCH
+  class="btn btn-outline-info"
+  (click)="openPopup1()"><i class="fa-solid fa-plus"></i><small class="px-2">ADD COURSE / BATCH</small>
   </button>
+  </div>
+  <div data-aos="fade-down-left">
   <button
   style="margin: 50px; padding: 10px"
   type="button"
-  class="btn btn-primary"
-  (click)="openPopup2()">DELETE COURSE / BATCH
+  class="btn btn-outline-danger"
+  (click)="openPopup2()"><i class="fa-solid fa-trash-can"></i><small class="px-2">DELETE COURSE / BATCH</small>
   </button>
+</div>
 </div>
   <div
   

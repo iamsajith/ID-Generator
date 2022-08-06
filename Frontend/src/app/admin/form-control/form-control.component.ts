@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/admin.service';
 import { StudentService } from 'src/app/student.service';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-form-control',
@@ -21,6 +22,7 @@ export class FormControlComponent implements OnInit {
   constructor(private _student: StudentService,private _admin:AdminService) {}
 
   ngOnInit(): void {
+    AOS.init();
     this._student.getCourses().subscribe((data) => {
       this.array = JSON.parse(JSON.stringify(data));
       this.courses = this.array[0].course;

@@ -16,3 +16,6 @@ img{
  width: 50px;
  border-radius: 50%;
 }
+.paginate{
+ text-align: end;
+}

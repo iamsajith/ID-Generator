@@ -4,6 +4,7 @@ import { AdminService } from 'src/app/admin.service';
 import { StudentService } from 'src/app/student.service';
 import { ModeratorModel } from 'src/app/Model/moderator.model';
 import { ToastrService } from 'ngx-toastr';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-batch-manager',
@@ -11,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./batch-manager.component.css']
 })
 export class BatchManagerComponent implements OnInit {
+  p : number = 1;
   id=""
   new:any
   displayStyle = "none";
@@ -23,7 +25,7 @@ export class BatchManagerComponent implements OnInit {
   
 
   ngOnInit(): void {
-
+    AOS.init();
     this.id = this._actiroute.snapshot.params['id'];
     this.admin.fetchModerator(this.id).subscribe((moddata) => {
       this.moderatorData = JSON.parse(JSON.stringify(moddata))

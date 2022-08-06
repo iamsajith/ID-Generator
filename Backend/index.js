@@ -17,6 +17,8 @@ const app = new express();
 app.use(cors());
 app.use(express.json({ limit: "200mb" }));
 
+app.use(express.static('dist/frontend'));
+
 // Send Mail
 
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -112,7 +114,7 @@ const sendMail = async (step, email, password) => {
 };
 // #1 Student - Authentication
 
-app.post("/student", (req, res) => {
+app.post("/api/student", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   studentData
@@ -140,7 +142,7 @@ app.post("/student", (req, res) => {
 
 // #2 Moderator - Authentication
 
-app.post("/moderator", (req, res) => {
+app.post("/api/moderator", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   moderatorData
@@ -168,7 +170,7 @@ app.post("/moderator", (req, res) => {
 
 // #3 Admin - Authentication
 
-app.post("/admin", (req, res) => {
+app.post("/api/admin", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   adminData
@@ -196,7 +198,7 @@ app.post("/admin", (req, res) => {
 
 // Student PIN
 
-app.post("/student/pin", (req, res) => {
+app.post("/api/student/pin", (req, res) => {
   const randomPin = Math.floor(1000 + Math.random() * 9000);
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
@@ -218,7 +220,7 @@ app.post("/student/pin", (req, res) => {
 });
 // Student New Password
 
-app.post("/student/newpassword", (req, res) => {
+app.post("/api/student/newpassword", (req, res) => {
   studentnew =
     Math.random().toString(36).substring(2, 5) +
     "stu" +
@@ -248,7 +250,7 @@ app.post("/student/newpassword", (req, res) => {
 
 // Moderator PIN
 
-app.post("/moderator/pin", (req, res) => {
+app.post("/api/moderator/pin", (req, res) => {
   const randomPin = Math.floor(1000 + Math.random() * 9000);
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
@@ -271,7 +273,7 @@ app.post("/moderator/pin", (req, res) => {
 });
 // Moderator New Password
 
-app.post("/moderator/newpassword", (req, res) => {
+app.post("/api/moderator/newpassword", (req, res) => {
   moderatornew =
     Math.random().toString(36).substring(2, 5) +
     "mod" +
@@ -301,7 +303,7 @@ app.post("/moderator/newpassword", (req, res) => {
 
 // Admin PIN
 
-app.post("/admin/pin", (req, res) => {
+app.post("/api/admin/pin", (req, res) => {
   const randomPin = Math.floor(1000 + Math.random() * 9000);
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
@@ -324,7 +326,7 @@ app.post("/admin/pin", (req, res) => {
 });
 // Admin New Password
 
-app.put("/admin/newpassword", (req, res) => {
+app.post("/api/admin/newpassword", (req, res) => {
   adminnew =
     Math.random().toString(36).substring(2, 5) +
     "adm" +
@@ -338,7 +340,6 @@ app.put("/admin/newpassword", (req, res) => {
       { $set: { password: adminnew } }
     )
     .then((data) => {
-      console.log(pin);
       if (data !== null) {
         const mail = req.body.email;
         sendMail((step = 1), mail, adminnew)
@@ -353,7 +354,7 @@ app.put("/admin/newpassword", (req, res) => {
     });
 });
 
-app.post("/student/register", (req, res) => {
+app.post("/api/student/register", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   const d = new Date();
@@ -366,7 +367,10 @@ app.post("/student/register", (req, res) => {
 
   register = req.body.data;
 
-  studentData
+  studentData.find({email:register.email}).then((data)=>{
+    if(data.length!=0){
+      if(data[0].status===undefined){
+        studentData
     .findOneAndUpdate(
       { email: register.email },
       {
@@ -386,9 +390,41 @@ app.post("/student/register", (req, res) => {
     .then((data) => {
       res.send(data);
     });
+
+    }
+    else{
+      res.send(undefined)
+    }
+  }
+    else{
+      res.send(null)
+    }
+
+  })
+
+  // studentData
+  //   .findOneAndUpdate(
+  //     { email: register.email },
+  //     {
+  //       $set: {
+  //         name: register.name,
+  //         phone: register.phone,
+  //         course: register.course,
+  //         batch: register.batch,
+  //         image: req.body.url,
+  //         startDate: register.startDate,
+  //         endDate: register.endDate,
+  //         status: "Submitted",
+  //         Date: dates,
+  //       },
+  //     }
+  //   )
+  //   .then((data) => {
+  //     res.send(data);
+  //   });
 });
 
-app.get("/idcard/:id", (req, res) => {
+app.get("/api/idcard/:id", (req, res) => {
   studentData
     .findOne({ _id: req.params.id }, { password: 0, pin: 0, _id: 0 })
     .then((data) => {
@@ -396,7 +432,7 @@ app.get("/idcard/:id", (req, res) => {
     });
 });
 
-app.get("/moderator/:id", (req, res) => {
+app.get("/api/moderator/:id", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
 
@@ -405,7 +441,7 @@ app.get("/moderator/:id", (req, res) => {
     res.send(data);
   });
 });
-app.post("/moderator/student", (req, res) => {
+app.post("/api/moderator/student", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   console.log(req.body.course);
@@ -418,7 +454,7 @@ app.post("/moderator/student", (req, res) => {
     });
 });
 
-app.post("/moderator/accept/:id", (req, res) => {
+app.post("/api/moderator/accept/:id", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   studentData
@@ -436,7 +472,7 @@ app.post("/moderator/accept/:id", (req, res) => {
     });
 });
 
-app.post("/moderator/reject/:id", (req, res) => {
+app.post("/api/moderator/reject/:id", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   studentData
@@ -456,7 +492,7 @@ app.post("/moderator/reject/:id", (req, res) => {
 
 // Student History
 
-app.post("/moderator/studentHistory", (req, res) => {
+app.post("/api/moderator/studentHistory", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   console.log(req.body.course);
@@ -471,7 +507,7 @@ app.post("/moderator/studentHistory", (req, res) => {
 });
 // Fetch Moderators
 
-app.post("/moderator/fetchmoderator", (req, res) => {
+app.post("/api/moderator/fetchmoderator", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   moderatorData
@@ -487,7 +523,7 @@ app.post("/moderator/fetchmoderator", (req, res) => {
 
 // Add Moderator
 
-app.post("/admin/moderator/add", (req, res) => {
+app.post("/api/admin/moderator/add", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   moderatorData.findById(req.body._id).then((data)=>{
@@ -543,14 +579,14 @@ app.post("/admin/moderator/add", (req, res) => {
 
 // Delete Moderator
 
-app.delete("/admin/moderator/:id",(req,res)=>{
+app.delete("/api/admin/moderator/:id",(req,res)=>{
   console.log(req.params.id)
   moderatorData.findByIdAndDelete(req.params.id).then((data)=>{
     res.send(data)
   })
 })
 // Update
-app.put("/update", (req, res) => {
+app.put("/api/update", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   moderatorData.findByIdAndUpdate(
@@ -574,7 +610,7 @@ app.put("/update", (req, res) => {
   );
 });
 
-app.get('/data/:id',(req,res)=>{
+app.get('/api/data/:id',(req,res)=>{
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   moderatorData.findByIdAndUpdate(req.params.id).then((data)=>{
@@ -584,7 +620,7 @@ app.get('/data/:id',(req,res)=>{
 
 
 
-app.get("/courses",(req,res)=>{
+app.get("/api/courses",(req,res)=>{
   courseData.find().then((data)=>{
     console.log(data)
     res.send(data)
@@ -592,7 +628,7 @@ app.get("/courses",(req,res)=>{
 })
 
 // Course Action
-app.post("/courseaction", (req, res) => {
+app.post("/api/courseaction", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   newarray = req.body
@@ -613,7 +649,7 @@ app.post("/courseaction", (req, res) => {
 
 // Batch Action
 
-app.post("/batchaction", (req, res) => {
+app.post("/api/batchaction", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   newarray = req.body
@@ -631,6 +667,9 @@ app.post("/batchaction", (req, res) => {
       res.send(data);
     });
 });
+
+app.get('/*', (req, res)=> {
+  res.sendFile(path.join(__dirname + '/dist//frontend/index.html'))})
 
 const PORT = process.env.PORT || 5000;
 

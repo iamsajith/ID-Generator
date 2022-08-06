@@ -7,6 +7,7 @@
       </button>
     </div>
     <div class="table-responsive">
+      <div data-aos="fade-right">
       <table class="table">
         <thead class="thead-light">
           <tr class="align-middle">
@@ -20,25 +21,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="align-middle" *ngFor="let i of moderatorData">
+          <tr class="align-middle" *ngFor="let i of moderatorData | paginate: {itemsPerPage: 5, currentPage: p};">
             <td>{{ i.name }}</td>
             <td>{{ i.phone }}<br/>{{ i.email }}</td>
             <td>{{ i.designation }}</td>
             <td>{{ i.course }}</td>
 
             <td>
-              <button class="btn btn-outline-danger" (click)="delete(i._id)">
+              <button class="btn btn-outline-danger mx-2" (click)="delete(i._id)">
                 <i class="fa-solid fa-trash-can"></i>
               </button>
-            </td>
-            <td>
-              <button class="btn btn-outline-warning" (click)="update(i._id)">
+              <button class="btn btn-outline-warning mx-2" (click)="update(i._id)">
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+    </div>
+    <div class="paginate">
+      <pagination-controls (pageChange) = "p = $event"></pagination-controls>
     </div>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { RegistrationModel } from 'src/app/Model/student.model';
 import { StudentService } from 'src/app/student.service';
 import * as AOS from 'aos';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apply',
@@ -21,7 +22,7 @@ export class ApplyComponent implements OnInit {
 
 
 
-  constructor(private _student: StudentService, private toaster: ToastrService) { }
+  constructor(private _student: StudentService, private toaster: ToastrService,private _router:Router) { }
 
   ngOnInit(): void {
     AOS.init();
@@ -52,13 +53,14 @@ export class ApplyComponent implements OnInit {
 
   Register() {
     this._student.studentRegister({ data: this.data, url: this.url }).subscribe((data) => {
-      if (data != null) {
+      if(data != null) {
         this.toaster.success("Your application is submitted", "Success")
       }
       else {
-        this.toaster.error("Error while submitting", "Error")
+        this.toaster.error("Error")
       }
     })
+    this._router.navigate([`/${localStorage.getItem("url")}`])
   }
 
 

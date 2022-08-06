@@ -9,6 +9,7 @@ import * as AOS from 'aos';
   styleUrls: ['./applications.component.css']
 })
 export class ApplicationsComponent implements OnInit {
+  p : number = 1;
   id = ""
   newData: any =[]
   studentData: any

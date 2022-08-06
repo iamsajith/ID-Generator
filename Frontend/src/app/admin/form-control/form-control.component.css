@@ -18,12 +18,6 @@ th{
 td{
  text-align: center;
 }
-.btn-outline-danger:hover{
- color:red;
-}
-.btn-outline-success:hover{
- color: green;
-}
 
 .wrapper {
  max-width: 300px;
@@ -100,13 +94,9 @@ td{
  }
 }
 
-
-
-
-
 .button{
- background-color: none;
- color: rgb(131, 7, 7);
- border: none;
- font-size:larger;
-}
+    background-color: none;
+    color: rgb(131, 7, 7);
+    border: none;
+    font-size:larger;
+    }

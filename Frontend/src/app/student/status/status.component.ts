@@ -13,7 +13,6 @@ export class StatusComponent implements OnInit {
   myAngularxQrCode: string = ""
   restricted = true
   text:string = ""
-  // status= ["Pending","Approved","Rejected"]
 
  @ViewChild('downloadfile',{static:false}) downloadfile!:ElementRef
 
@@ -39,6 +38,7 @@ export class StatusComponent implements OnInit {
 
 
   ngOnInit(): void {
+  this.restricted = true
   const id = localStorage.getItem("id") 
   this._student.getID(id).subscribe((data)=>{
     console.log(data)

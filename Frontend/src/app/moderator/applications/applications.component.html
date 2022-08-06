@@ -16,7 +16,7 @@
         </thead>
        
         <tbody>
-          <tr class="align-middle" *ngFor="let i of studentData">
+          <tr class="align-middle" *ngFor="let i of studentData | paginate: {itemsPerPage: 5, currentPage: p};">
             <td>
               <img [src]="i.image" alt="image" />
             </td>
@@ -27,15 +27,13 @@
             <td>{{ i.endDate }}</td>
             <td>
               <button
-                class="button btn btn-rounded-circle btn-outline-success"
+                class="button btn btn-rounded-circle btn-outline-success mx-2"
                 (click)="accept(i._id)"
               >
                 <i class="fa-solid fa-check"></i>
               </button>
-            </td>
-            <td>
               <button
-                class="button btn btn-rounded-circle btn-outline-danger"
+                class="button btn btn-rounded-circle btn-outline-danger mx-2"
                 (click)="reject(i._id)"
               >
                 <i class="fa-solid fa-xmark"></i>
@@ -44,9 +42,11 @@
           </tr>
 
         </tbody>
-      
       </table>
     </div>
+    </div>
+    <div class="paginate">
+      <pagination-controls (pageChange) = "p = $event"></pagination-controls>
     </div>
   </div>
 </div>

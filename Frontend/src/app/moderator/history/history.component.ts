@@ -9,6 +9,7 @@ import * as AOS from 'aos';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
+  p:number = 1;
   newData: any =[]
   studentData: any
   title = 'angular-app';
