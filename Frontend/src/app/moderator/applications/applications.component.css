@@ -13,7 +13,8 @@ td{
  padding-bottom: 10px;
 }
 img{
- width: 50px;
+ width: 60px;
+ height: 60px;
  border-radius: 50%;
 }
 .paginate{

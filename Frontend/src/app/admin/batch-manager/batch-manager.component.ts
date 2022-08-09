@@ -12,6 +12,9 @@ import * as AOS from 'aos';
   styleUrls: ['./batch-manager.component.css']
 })
 export class BatchManagerComponent implements OnInit {
+  key : string = 'id';
+  reverse : boolean = false;
+  name:string=""
   p : number = 1;
   id=""
   new:any
@@ -70,6 +73,25 @@ export class BatchManagerComponent implements OnInit {
       }
     })
 
+  }
+
+  search()
+  {
+    if(this.name=""){
+      this.ngOnInit()
+    }
+    else{
+      this.moderatorData = this.moderatorData.filter( (res: { name: string; }): any=>{
+
+        return res.name.toLowerCase().match(this.name.toLowerCase());
+
+      })
+    }
+  }
+  sort(key: any){
+
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 
 

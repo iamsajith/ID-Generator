@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModeratorService } from 'src/app/moderator.service';
+
 import * as AOS from 'aos';
 
 @Component({
@@ -9,6 +10,9 @@ import * as AOS from 'aos';
   styleUrls: ['./applications.component.css']
 })
 export class ApplicationsComponent implements OnInit {
+  key : string = 'id';
+  reverse : boolean = false;
+  name:string=""
   p : number = 1;
   id = ""
   newData: any =[]
@@ -44,5 +48,11 @@ export class ApplicationsComponent implements OnInit {
       window.location.reload()
   })
 }
+
+  sort(key: any){
+
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
 
 }

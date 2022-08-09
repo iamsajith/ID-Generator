@@ -6,12 +6,26 @@
         <i class="fa-solid fa-plus"></i><small class="px-2">NEW MANAGER</small>
       </button>
     </div>
+    <nav class = "navbar">
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+
+        [(ngModel)]="data.name"
+        (ngModelChange)="search()"
+
+        placeholder="Search">
+
+
+
+    </nav>
     <div class="table-responsive">
       <div data-aos="fade-right">
       <table class="table">
         <thead class="thead-light">
           <tr class="align-middle">
-            <th>NAME</th>
+            <th (click)="sort('id')"><small class="px-2">NAME</small><i class="fa-solid fa-sort"></i></th>
             <th>CONTACT</th>
             <th>DESIGNATION</th>
             <th>COURSE</th>
@@ -21,7 +35,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="align-middle" *ngFor="let i of moderatorData | paginate: {itemsPerPage: 5, currentPage: p};">
+          <tr class="align-middle" *ngFor="let i of moderatorData|orderBy: key:reverse|filterBy: data | paginate: {itemsPerPage: 5, currentPage: p};">
             <td>{{ i.name }}</td>
             <td>{{ i.phone }}<br/>{{ i.email }}</td>
             <td>{{ i.designation }}</td>
@@ -177,7 +191,7 @@ role="dialog"
             <div class="form-field d-flex align-items-center">
               <i class="fa-solid fa-user-tie"></i>
               <label for="" [class.d-none]="designation.valid"
-                >Course</label
+                >Designation</label
               >
               <select
                 type="text"

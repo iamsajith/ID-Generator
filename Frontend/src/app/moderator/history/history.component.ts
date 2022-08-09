@@ -9,6 +9,9 @@ import * as AOS from 'aos';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
+  key : string = 'id';
+  reverse : boolean = false;
+  name:string=""
   p:number = 1;
   newData: any =[]
   studentData: any
@@ -37,6 +40,12 @@ export class HistoryComponent implements OnInit {
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, this.fileName);
+  }
+
+  sort(key: any){
+
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 
 

@@ -7,7 +7,7 @@
         <thead class="thead-light">
           <tr class="align-middle">
             <th></th>
-            <th>NAME</th>
+            <th (click)="sort('id')"><small class="px-2">NAME</small><i class="fa-solid fa-sort"></i></th>
             <th>CONTACT</th>
             <th>BATCH</th>
             <th>APPLIED ON</th>
@@ -16,7 +16,7 @@
         </thead>
        
         <tbody>
-          <tr class="align-middle" *ngFor="let i of studentData | paginate: {itemsPerPage: 5, currentPage: p};">
+          <tr class="align-middle" *ngFor="let i of studentData|orderBy: key:reverse| paginate: {itemsPerPage: 5, currentPage: p};">
             <td>
               <img [src]="i.image" alt="image" />
             </td>

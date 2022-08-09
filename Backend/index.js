@@ -119,7 +119,7 @@ app.post("/api/student", (req, res) => {
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   studentData
     .findOne(
-      { email: req.body.email, password: req.body.password },
+      { email: req.body.email.toLowerCase(), password: req.body.password },
       (err, user) => {
         if (err) {
           console.log("error is", err);
@@ -147,7 +147,7 @@ app.post("/api/moderator", (req, res) => {
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   moderatorData
     .findOne(
-      { email: req.body.email, password: req.body.password },
+      { email: req.body.email.toLowerCase(), password: req.body.password },
       (err, user) => {
         if (err) {
           console.log("error is", err);
@@ -175,7 +175,7 @@ app.post("/api/admin", (req, res) => {
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   adminData
     .findOne(
-      { email: req.body.email, password: req.body.password },
+      { email: req.body.email.toLowerCase(), password: req.body.password },
       (err, user) => {
         if (err) {
           console.log("error is", err);
@@ -402,26 +402,6 @@ app.post("/api/student/register", (req, res) => {
 
   })
 
-  // studentData
-  //   .findOneAndUpdate(
-  //     { email: register.email },
-  //     {
-  //       $set: {
-  //         name: register.name,
-  //         phone: register.phone,
-  //         course: register.course,
-  //         batch: register.batch,
-  //         image: req.body.url,
-  //         startDate: register.startDate,
-  //         endDate: register.endDate,
-  //         status: "Submitted",
-  //         Date: dates,
-  //       },
-  //     }
-  //   )
-  //   .then((data) => {
-  //     res.send(data);
-  //   });
 });
 
 app.get("/api/idcard/:id", (req, res) => {
@@ -498,9 +478,7 @@ app.post("/api/moderator/studentHistory", (req, res) => {
   console.log(req.body.course);
   data = req.body;
   studentData
-    .find({ course: data.course }, { password: 0, pin: 0 })
-    .sort({ name: 1 })
-    .then((data) => {
+    .find({ course: data.course }, { password: 0, pin: 0 }).then((data) => {
       console.log(data);
       res.send(data);
     });
@@ -511,9 +489,7 @@ app.post("/api/moderator/fetchmoderator", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   moderatorData
-    .find({}, { password: 0, pin: 0 })
-    .sort({ name: 1 })
-    .then((data) => {
+    .find({}, { password: 0, pin: 0 }).then((data) => {
       console.log(data);
       res.send(data);
     });
